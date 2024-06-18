@@ -40,10 +40,10 @@
             <button type="submit" class="btn btn-primary btn-block">Entrar</button>
         </form>
         <div class="mt-4 text-center">
-            <a href="redefinirSenha.html">Esqueci minha senha</a>
+            <a href="./redefinirSenha.php">Esqueci minha senha</a>
         </div>
         <div class="mt-2 text-center">
-            <a href="cadastro.html">Primeiro Acesso</a>
+            <a href="./cadastroNovoUsuario.php">Primeiro Acesso</a>
         </div>
     </div>
 </div>
