@@ -44,9 +44,7 @@
         <div class="col-4 d-flex justify-content-center align-items-center">
           <img class="mb-4" src="logo-ge.svg" alt="logo" width="60px">
         </div>
-        <div class="col-4 d-flex justify-content-center align-items-center">
-          <h1>Recuperação de Senha</h1>
-        </div>
+        <div class="col-4 d-flex justify-content-center align-items-center"></div>
         <div class="col-4 d-flex justify-content-end align-items-center">
           <div class="dropdown me-2">
             <button class="btn btn-outline-light dropdown-toggle" type="button" id="accessibilityMenuButton"
@@ -65,7 +63,7 @@
               <i class="fas fa-user me-2"></i>
             </button>
             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userMenuButton">
-              <li><a class="dropdown-item" href="login.html">Voltar Para Login</a></li>
+              <li><a class="dropdown-item" href="./login.php">Voltar Para Login</a></li>
             </ul>
           </div>
         </div>

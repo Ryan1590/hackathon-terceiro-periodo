@@ -68,7 +68,7 @@
                         </button>
                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton">
                             <li><a class="dropdown-item" href="redefinirSenha.html">Atualização de senha</a></li>
-                            <li><a class="dropdown-item" href="login.html">Login</a></li>
+                            <li><a class="dropdown-item" href="./login.php">Login</a></li>
                         </ul>
                     </div>
                 </div>
