@@ -25,17 +25,15 @@
 <div class="container d-flex justify-content-center align-items-center vh-100">
     <div class="col-md-4 border shadow rounded p-4">
         <h2 class="text-center">Login</h2>
-        <form action="home.html" method="get">
+        <form action="" method="get">
             <div class="form-group">
                 <label for="email">Email:</label>
                 <input type="email" class="form-control" id="email" name="email" placeholder="Digite seu email" required autofocus>
             </div>
             <div class="form-group" style="position: relative;">
                 <label for="password">Senha:</label>
-                <input type="password" class="form-control" id="password" name="password"
-                    placeholder="Digite sua senha" required>
-                <i class="fa fa-eye" id="togglePassword"
-                    style="position: absolute; right: 10px; top: 40px; cursor: pointer;"></i>
+                <input type="password" class="form-control" id="password" name="password" placeholder="Digite sua senha" required>
+                <i class="fa fa-eye" id="togglePassword" style="position: absolute; right: 10px; top: 40px; cursor: pointer;"></i>
             </div>
             <button type="submit" class="btn btn-primary btn-block">Entrar</button>
         </form>

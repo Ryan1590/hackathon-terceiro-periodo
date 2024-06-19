@@ -74,8 +74,8 @@
                             <i class="fas fa-user me-2"></i>
                         </button>
                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton">
-                            <li><a class="dropdown-item" href="redefinirSenha.html">Atualização de senha</a></li>
-                            <li><a class="dropdown-item" href="login.html">Login</a></li>
+                            <li><a class="dropdown-item" href="./redefinirSenha.php">Atualização de senha</a></li>
+                            <li><a class="dropdown-item" href="./login.php">Login</a></li>
                         </ul>
                     </div>
                 </div>
@@ -84,13 +84,9 @@
     </div>
 
     <div class="container d-flex justify-content-center align-items-center min-vh-100">
-        <div class="row">
-        <div class="col-4 d-flex justify-content-center align-items-center">
-                    <img class="mb-4" src="img/iconedelibras.png" alt="logo" width="60px">
-                </div>
-            
-            <div class="col-md-8 register-container p-4 bg-white rounded shadow">
-                <h1 class="mb-4">Cadastro de Novo Usuário</h1>
+        <div class="row"> 
+            <div class="col-md-12 register-container p-4 bg-white rounded shadow">
+                <h1 class="mb-4">Cadastro Usuário</h1>
                 <form id="register-form">
                     <div class="form-group position-relative">
                         <label for="fullname">Nome Completo:</label>
