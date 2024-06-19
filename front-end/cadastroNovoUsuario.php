@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html lang="pt-br">
 <head> 
@@ -38,6 +36,17 @@
                 min-width: 150px;
             }
         }
+
+        .icon-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .icon-container i {
+            font-size: 100px;
+            color: #007bff;
+        }
     </style>
 </head>
 
@@ -47,7 +56,7 @@
         <div class="container mt-3">
             <div class="row">
                 <div class="col-4 d-flex justify-content-center align-items-center">
-                    <img class="mb-4" src="logo-ge.svg" alt="logo" width="60px">
+                    <img class="mb-4" src="img/iconedelibras.png" alt="logo" width="60px">
                 </div>
                 <div class="col-4 d-flex justify-content-center align-items-center ms-auto">
                     <div class="dropdown me-2">
@@ -68,7 +77,7 @@
                         </button>
                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton">
                             <li><a class="dropdown-item" href="redefinirSenha.html">Atualização de senha</a></li>
-                            <li><a class="dropdown-item" href="./login.php">Login</a></li>
+                            <li><a class="dropdown-item" href="login.html">Login</a></li>
                         </ul>
                     </div>
                 </div>
@@ -77,40 +86,45 @@
     </div>
 
     <div class="container d-flex justify-content-center align-items-center min-vh-100">
-        <div class="register-container p-4 bg-white rounded shadow">
-            <h1 class="mb-4">Cadastro de Novo Usuário</h1>
-            <form id="register-form">
-                <div class="form-group position-relative">
-                    <label for="fullname">Nome Completo:</label>
-                    <input type="text" id="fullname" name="fullname" class="form-control" required autofocus>
+        <div class="row">
+            <div class="col-md-4 icon-container">
+                <i class="fas fa-user-plus"></i>
+            </div>
+            <div class="col-md-8 register-container p-4 bg-white rounded shadow">
+                <h1 class="mb-4">Cadastro de Novo Usuário</h1>
+                <form id="register-form">
+                    <div class="form-group position-relative">
+                        <label for="fullname">Nome Completo:</label>
+                        <input type="text" id="fullname" name="fullname" class="form-control" required autofocus>
+                    </div>
+                    <div class="form-group position-relative">
+                        <label for="email">E-mail:</label>
+                        <input type="email" id="email" name="email" class="form-control" required>
+                    </div>
+                    <div class="form-group position-relative">
+                        <label for="username">Nome de Usuário:</label>
+                        <input type="text" id="username" name="username" class="form-control" required>
+                    </div>
+                    <div class="form-group position-relative">
+                        <label for="password">Senha:</label>
+                        <input type="password" id="password" name="password" class="form-control" required>
+                        <span class="toggle-password" onclick="togglePasswordVisibility('password', this)">
+                            <i class="fa fa-eye"></i>
+                        </span>
+                    </div>
+                    <div class="form-group position-relative">
+                        <label for="confirm-password">Confirmação de Senha:</label>
+                        <input type="password" id="confirm-password" name="confirm-password" class="form-control"
+                            required>
+                        <span class="toggle-password" onclick="togglePasswordVisibility('confirm-password', this)">
+                            <i class="fa fa-eye"></i>
+                        </span>
+                    </div>
+                    <button type="submit" id="register-btn" class="btn btn-primary btn-block">Cadastrar</button>
+                </form>
+                <div id="success-message" class="alert alert-success mt-4 d-none" role="alert">
+                    Cadastro concluído!
                 </div>
-                <div class="form-group position-relative">
-                    <label for="email">E-mail:</label>
-                    <input type="email" id="email" name="email" class="form-control" required>
-                </div>
-                <div class="form-group position-relative">
-                    <label for="username">Nome de Usuário:</label>
-                    <input type="text" id="username" name="username" class="form-control" required>
-                </div>
-                <div class="form-group position-relative">
-                    <label for="password">Senha:</label>
-                    <input type="password" id="password" name="password" class="form-control" required>
-                    <span class="toggle-password" onclick="togglePasswordVisibility('password', this)">
-                        <i class="fa fa-eye"></i>
-                    </span>
-                </div>
-                <div class="form-group position-relative">
-                    <label for="confirm-password">Confirmação de Senha:</label>
-                    <input type="password" id="confirm-password" name="confirm-password" class="form-control"
-                        required>
-                    <span class="toggle-password" onclick="togglePasswordVisibility('confirm-password', this)">
-                        <i class="fa fa-eye"></i>
-                    </span>
-                </div>
-                <button type="submit" id="register-btn" class="btn btn-primary btn-block">Cadastrar</button>
-            </form>
-            <div id="success-message" class="alert alert-success mt-4 d-none" role="alert">
-                Cadastro concluído!
             </div>
         </div>
     </div>
