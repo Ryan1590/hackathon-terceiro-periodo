@@ -55,9 +55,7 @@
     <div class="header text-center">
         <div class="container mt-3">
             <div class="row">
-                <div class="col-4 d-flex justify-content-center align-items-center">
-                    <img class="mb-4" src="img/iconedelibras.png" alt="logo" width="60px">
-                </div>
+                
                 <div class="col-4 d-flex justify-content-center align-items-center ms-auto">
                     <div class="dropdown me-2">
                         <button class="btn btn-outline-light dropdown-toggle" type="button" id="dropdownMenuButton"
@@ -87,9 +85,10 @@
 
     <div class="container d-flex justify-content-center align-items-center min-vh-100">
         <div class="row">
-            <div class="col-md-4 icon-container">
-                <i class="fas fa-user-plus"></i>
-            </div>
+        <div class="col-4 d-flex justify-content-center align-items-center">
+                    <img class="mb-4" src="img/iconedelibras.png" alt="logo" width="60px">
+                </div>
+            
             <div class="col-md-8 register-container p-4 bg-white rounded shadow">
                 <h1 class="mb-4">Cadastro de Novo Usuário</h1>
                 <form id="register-form">
