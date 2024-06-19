@@ -67,34 +67,36 @@
 
 <body>
 
-    <div class="container-login">
-        <div class="login-form">
-            <h2>Login</h2>
-            <form action="" method="get">
-                <div class="form-group">
-                    <label for="email">Email:</label>
-                    <div class="input-group">
-                        <input type="email" class="form-control" id="email" name="email" placeholder="Digite seu email" required autofocus>
-                        <div class="input-group-append">
-                            <span class="input-group-text"><i class="fa fa-envelope"></i></span>
+    <div class="container">
+        <div class="container-login">
+            <div class="login-form">
+                <h2>Login</h2>
+                <form action="" method="get">
+                    <div class="form-group">
+                        <label for="email">Email:</label>
+                        <div class="input-group">
+                            <input type="email" class="form-control" id="email" name="email" placeholder="Digite seu email" required autofocus>
+                            <div class="input-group-append">
+                                <span class="input-group-text"><i class="fa fa-envelope"></i></span>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="form-group">
-                    <label for="password">Senha:</label>
-                    <div class="input-group">
-                        <input type="password" class="form-control" id="password" name="password" placeholder="Digite sua senha" required>
-                        <div class="input-group-append">
-                            <span class="input-group-text" id="togglePassword"><i class="fa fa-eye"></i></span>
+                    <div class="form-group">
+                        <label for="password">Senha:</label>
+                        <div class="input-group">
+                            <input type="password" class="form-control" id="password" name="password" placeholder="Digite sua senha" required>
+                            <div class="input-group-append">
+                                <span class="input-group-text" id="togglePassword"><i class="fa fa-eye"></i></span>
+                            </div>
                         </div>
                     </div>
+                    <button type="submit" class="btn btn-primary btn-block">Entrar</button>
+                </form>
+                <div class="footer-text">
+                    <a href="./redefinirSenha.php">Esqueci minha senha</a>
+                    <span class="mx-2">|</span>
+                    <a href="./cadastroNovoUsuario.php">Primeiro Acesso</a>
                 </div>
-                <button type="submit" class="btn btn-primary btn-block">Entrar</button>
-            </form>
-            <div class="footer-text">
-                <a href="./redefinirSenha.php">Esqueci minha senha</a>
-                <span class="mx-2">|</span>
-                <a href="./cadastroNovoUsuario.php">Primeiro Acesso</a>
             </div>
         </div>
     </div>
@@ -105,7 +107,7 @@
     <script>
         const togglePassword = document.querySelector('#togglePassword');
         const password = document.querySelector('#password');
-        togglePassword.addEventListener('click', function () {
+        togglePassword.addEventListener('click', function() {
             const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
             password.setAttribute('type', type);
             this.querySelector('i').classList.toggle('fa-eye-slash');

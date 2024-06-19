@@ -50,22 +50,12 @@
                 </div>
                 <div class="col-md-4 col-12 d-flex justify-content-center"></div>
                 <div class="col-md-4 col-6 d-flex justify-content-end">
-                    <div class="dropdown me-2">
-                        <button class="btn btn-outline-light dropdown-toggle" type="button" id="accessibilityMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="fas fa-cog"></i>
-                            <span class="visually-hidden">Configurações de acessibilidade</span>
-                        </button>
-                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="accessibilityMenuButton">
-                            <li><a class="dropdown-item" href="#">Aumentar fonte</a></li>
-                            <li><a class="dropdown-item" href="#">Contraste de cores</a></li>
-                        </ul>
-                    </div>
                     <div class="dropdown">
                         <button class="btn btn-primary dropdown-toggle" type="button" id="userMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
                             <i class="fas fa-user me-2"></i>
                         </button>
                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userMenuButton">
-                            <li><a class="dropdown-item" href="./login.php">Voltar Para Login</a></li>
+                            <li><a class="dropdown-item" href="./login.php">Login</a></li>
                         </ul>
                     </div>
                 </div>
@@ -75,7 +65,7 @@
 
     <div class="container d-flex justify-content-center align-items-center" style="min-height: 65vh;">
         <div class="recovery-container p-4 bg-white rounded shadow">
-            <h1 class="mb-4">Recuperar Senha</h1>
+            <h1 class="mb-4 text-center">Redefinir Senha</h1>
             <form onsubmit="enviar(event)">
                 <div class="form-group">
                     <label for="email">E-mail cadastrado:</label>

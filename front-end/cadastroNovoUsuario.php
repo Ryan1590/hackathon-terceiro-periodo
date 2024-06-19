@@ -9,8 +9,8 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
     <style>
-         body {
-            background-color: #f0f5f9 !important; 
+        body {
+            background-color: #f0f5f9 !important;
             font-family: Arial, sans-serif;
         }
 
@@ -63,22 +63,12 @@
                     <!-- Espaço reservado para centralização -->
                 </div>
                 <div class="col-4 d-flex justify-content-end align-items-center">
-                    <div class="dropdown me-2">
-                        <button class="btn btn-outline-light dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="fas fa-cog"></i>
-                            <span class="visually-hidden">Configurações de acessibilidade</span>
-                        </button>
-                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton">
-                            <li><a class="dropdown-item" href="#">Aumentar fonte</a></li>
-                            <li><a class="dropdown-item" href="#">Contraste de cores</a></li>
-                        </ul>
-                    </div>
                     <div class="dropdown">
                         <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
                             <i class="fas fa-user me-2"></i>
                         </button>
                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton">
-                            <li><a class="dropdown-item" href="./redefinirSenha.php">Atualização de senha</a></li>
+                            <li><a class="dropdown-item" href="./redefinirSenha.php">Redefinir senha</a></li>
                             <li><a class="dropdown-item" href="./login.php">Login</a></li>
                         </ul>
                     </div>
@@ -87,21 +77,22 @@
         </div>
     </div>
 
-    <div class="container d-flex justify-content-center align-items-center min-vh-100">
-        <div class="register-container p-4 bg-white rounded shadow" style="margin-top: -140px;">
-            <h1 class="mb-4">Cadastro de Usuário</h1>
-            <form id="register-form">
+    <br><br>
+    <div class="container">
+        <div class="register-container p-4 bg-white rounded shadow">
+            <h1 class="mb-4 text-center">Cadastro de Usuário</h1>
+            <form id="register-form" action="./processa_NovoUsuario.php" method="post">
                 <div class="form-group position-relative">
-                    <label for="fullname">Nome Completo:</label>
-                    <input type="text" id="fullname" name="fullname" class="form-control" required autofocus>
+                    <label for="nomeCompleto">Nome Completo:</label>
+                    <input type="text" id="nomeCompleto" name="nomeCompleto" class="form-control" required autofocus>
                 </div>
                 <div class="form-group position-relative">
                     <label for="email">E-mail:</label>
                     <input type="email" id="email" name="email" class="form-control" required>
                 </div>
                 <div class="form-group position-relative">
-                    <label for="username">Nome de Usuário:</label>
-                    <input type="text" id="username" name="username" class="form-control" required>
+                    <label for="nomeUsuario">Nome de Usuário:</label>
+                    <input type="text" id="username" name="nomeUsuario" class="form-control" required>
                 </div>
                 <div class="form-group position-relative">
                     <label for="password">Senha:</label>
@@ -111,9 +102,9 @@
                     </span>
                 </div>
                 <div class="form-group position-relative">
-                    <label for="confirm-password">Confirmação de Senha:</label>
-                    <input type="password" id="confirm-password" name="confirm-password" class="form-control" required>
-                    <span class="toggle-password" onclick="togglePasswordVisibility('confirm-password', this)">
+                    <label for="confirm-senha">Confirmação de Senha:</label>
+                    <input type="password" id="confirm-senha" name="confirm-senha" class="form-control" required>
+                    <span class="toggle-password" onclick="togglePasswordVisibility('confirm-senha', this)">
                         <i class="fa fa-eye"></i>
                     </span>
                 </div>
@@ -136,10 +127,9 @@
         }
 
         document.getElementById('register-form').addEventListener('submit', function(event) {
-            event.preventDefault();
             var successMessage = document.getElementById('success-message');
             var password = document.getElementById('password').value;
-            var confirmPassword = document.getElementById('confirm-password').value;
+            var confirmPassword = document.getElementById('confirm-senha').value;
 
             var formFields = document.querySelectorAll('#register-form input');
             var formValid = true;
@@ -164,20 +154,12 @@
             }
 
             if (!formValid) {
+                event.preventDefault();
                 return;
             }
 
             successMessage.classList.remove('d-none');
             successMessage.textContent = 'Cadastro concluído!';
-            alert("Usuário cadastrado com sucesso!");
-            window.location.href = "login.html";
-
-            var form = event.target;
-            form.reset();
-
-            setTimeout(function() {
-                successMessage.classList.add('d-none');
-            }, 3000);
         });
     </script>
 
