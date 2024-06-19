@@ -16,7 +16,7 @@
     .header {
       background-color: #007bff;
       color: white;
-      padding: 10px 0;
+      padding: 1px 0;
     }
 
     .header h1 {
@@ -42,7 +42,7 @@
     <div class="container">
       <div class="row">
         <div class="col-4 d-flex justify-content-center align-items-center">
-          <img class="mb-4" src="logo-ge.svg" alt="logo" width="60px">
+          <img class="mb-4" src="./img/zegotinha.jpeg" alt="logo" width="90px">
         </div>
         <div class="col-4 d-flex justify-content-center align-items-center"></div>
         <div class="col-4 d-flex justify-content-end align-items-center">
