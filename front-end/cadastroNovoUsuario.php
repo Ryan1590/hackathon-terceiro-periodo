@@ -90,7 +90,7 @@
 
     <div class="container d-flex justify-content-center align-items-center min-vh-100">
         <div class="register-container p-4 bg-white rounded shadow">
-            <h1 class="mb-4">Cadastro de Novo Usuário</h1>
+            <h1 class="mb-4">Cadastro de Usuário</h1>
             <form id="register-form">
                 <div class="form-group position-relative">
                     <label for="fullname">Nome Completo:</label>
