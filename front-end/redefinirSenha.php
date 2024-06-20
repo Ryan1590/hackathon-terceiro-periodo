@@ -7,8 +7,11 @@
     <title>Recuperação de Senha</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <!DOCTYPE html>
+<html lang="en">
+<head>
     <style>
-           body {
+        body {
             background-color: #f0f5f9;
             font-family: Arial, sans-serif;
         }
@@ -39,16 +42,16 @@
         }
     </style>
 </head>
-
 <body>
 
     <div class="header text-center">
         <div class="container">
-            <div class="row align-items-center">
-                <div class="col-md-4 col-6 d-flex justify-content-center">
+            <div class="row align-items-center justify-content-between">
+                <div class="col-md-4 col-6 d-flex justify-content-start">
                     <img class="mb-2" src="./img/zegotinha.jpeg" alt="logo">
                 </div>
-                <div class="col-md-4 col-12 d-flex justify-content-center"></div>
+                <div class="col-md-4 col-12 d-flex justify-content-center">
+                </div>
                 <div class="col-md-4 col-6 d-flex justify-content-end">
                     <div class="dropdown">
                         <button class="btn btn-primary dropdown-toggle" type="button" id="userMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
@@ -62,6 +65,8 @@
             </div>
         </div>
     </div>
+
+
 
     <div class="container d-flex justify-content-center align-items-center" style="min-height: 65vh;">
         <div class="recovery-container p-4 bg-white rounded shadow">
