@@ -42,36 +42,41 @@
     </div>
 </nav>
 
+
 <div class="container mt-4">
     <h2 class="text-center mt-4">Pesquisar Agendamentos</h2>
-    <div class="text-center mb-4 mt-4">
-        <a href="agendamento.php" type="button" class="btn btn-success mt-4 mb-4">Adicionar Agendamento</a>
+    <div class="d-flex justify-content-end mb-4 mt-4">
+        <a href="?page=agendamento" type="button" class="btn btn-primary mt-4 mb-4">Solicitar Agendamento</a>
     </div>
-    <form class="mt-4" action="menuAgendamento.php" method="GET">
-        <div class="form-group">
-            <label for="cpf">CPF:</label>
-            <input type="text" class="form-control" id="cpf" name="cpf" placeholder="Digite o CPF" required>
-        </div>
-        <div class="form-group">
-            <label for="vacina">Vacina:</label>
-            <select class="form-select" id="vacina" name="vacina">
-                <option value="">Selecione a Vacina</option>
-                <?php
-                $url = 'http://localhost:3000/vacinas';
-                $vacinas = @file_get_contents($url);
-                if ($vacinas !== false) {
-                    $vacinas = json_decode($vacinas);
-                    foreach ($vacinas as $vacina) {
-                        echo "<option value='" . htmlspecialchars($vacina->nome, ENT_QUOTES, 'UTF-8') . "'>" . htmlspecialchars($vacina->nome, ENT_QUOTES, 'UTF-8') . "</option>";
+    <div class="card shadow p-4 mb-4">
+        <form class="mt-4" action="menuAgendamento.php" method="GET">
+            <div class="form-group mb-3">
+                <label for="cpf">CPF:</label>
+                <input type="text" class="form-control" id="cpf" name="cpf" placeholder="Digite o CPF" required>
+            </div>
+            <div class="form-group mb-3">
+                <label for="vacina">Vacina:</label>
+                <select class="form-select" id="vacina" name="vacina">
+                    <option value="">Selecione a Vacina</option>
+                    <?php
+                    $url = 'http://localhost:3000/vacinas';
+                    $vacinas = @file_get_contents($url);
+                    if ($vacinas !== false) {
+                        $vacinas = json_decode($vacinas);
+                        foreach ($vacinas as $vacina) {
+                            echo "<option value='" . htmlspecialchars($vacina->nome, ENT_QUOTES, 'UTF-8') . "'>" . htmlspecialchars($vacina->nome, ENT_QUOTES, 'UTF-8') . "</option>";
+                        }
+                    } else {
+                        echo "<option value=''>Erro ao carregar vacinas</option>";
                     }
-                } else {
-                    echo "<option value=''>Erro ao carregar vacinas</option>";
-                }
-                ?>
-            </select>
-        </div>
-        <button type="submit" class="btn btn-primary">Pesquisar</button>
-    </form>
+                    ?>
+                </select>
+            </div>
+            <div class="text-center">
+                <button type="submit" class="btn btn-primary">Pesquisar</button>
+            </div>
+        </form>
+    </div>
 </div>
 
 

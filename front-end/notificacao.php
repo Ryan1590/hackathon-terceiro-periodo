@@ -27,24 +27,24 @@
             padding: 20px;
             flex-grow: 1;
         }
-        .alertas-container {
+        .alertas-container, .lembretes-container {
             background-color: #fff;
             border-radius: 5px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             padding: 20px;
             margin-bottom: 20px;
         }
-        .alerta-item {
+        .alerta-item, .lembrete-item {
             margin-bottom: 10px;
-        }
-        .lembretes-container {
-            background-color: #fff;
+            padding: 15px;
+            border: 1px solid #e0e0e0;
             border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            padding: 20px;
+            display: flex;
+            align-items: center;
         }
-        .lembrete-item {
-            margin-bottom: 10px;
+        .alerta-item i, .lembrete-item i {
+            margin-right: 10px;
+            color: #007bff;
         }
         .footer {
             background-color: black;
@@ -78,9 +78,12 @@
     </div>
 </nav>
 
-<header class="mt-4">
-    <h1>Alertas e Lembretes de Vacinação Atenção!</h1>
-</header>
+<div class="wrapper">
+    <div class="container mt-4 d-flex justify-content-center">
+        <p class="fw-bold">Atenção aos Lembretes!</p>
+    </div>
+</div>
+
 <main>
     <div class="alertas-container">
         <h2>Próximas Vacinas</h2>
@@ -90,7 +93,7 @@
             $vacinas = file_get_contents($url);
             $vacinas = json_decode($vacinas);
             foreach ($vacinas as $vacina) {
-                echo " Vacina $vacina->nome<br>  ";
+                echo "<div class='alerta-item'><i class='fas fa-syringe'></i> Vacina $vacina->nome</div>";
             }
         ?>
         </div>

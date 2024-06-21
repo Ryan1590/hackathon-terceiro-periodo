@@ -32,7 +32,7 @@
 </nav>
   
     <br><br>
-    <div class="container">
+<div class="container">
     <div class="register-container p-4 bg-white rounded shadow">
         <h1 class="mb-4 text-center">Agendamento</h1>
         <form id="register-form" action="./processa_agendamento.php" method="post">

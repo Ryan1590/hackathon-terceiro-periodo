@@ -180,12 +180,6 @@ if (isset($_GET['page'])) {
     </div>
 </div>
 
-<div class="wrapper">
-    <div class="container mt-4">
-    <img src="./img/bannerimagemfalsa.png" alt="Banner" class="img-fluid">
-    </div>
-</div>
-
 <br><br>
 <div class="container d-container">
     <div class="link-container">
