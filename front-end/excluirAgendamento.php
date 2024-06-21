@@ -1,4 +1,6 @@
-<?php
+]<?php
+session_start();
+
 $id = isset($_GET['id']) ? $_GET['id'] : null;
 if ($id === null) {
     die('ID do agendamento não fornecido.');

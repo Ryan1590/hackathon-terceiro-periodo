@@ -45,7 +45,7 @@
 <div class="container mt-4">
     <h2 class="text-center mt-4">Pesquisar Agendamentos</h2>
     <div class="text-center mb-4 mt-4">
-        <a href="?page=agendamento" type="button" class="btn btn-success mt-4 mb-4">Adicionar Agendamento</a>
+        <a href="agendamento.php" type="button" class="btn btn-success mt-4 mb-4">Adicionar Agendamento</a>
     </div>
     <form class="mt-4" action="menuAgendamento.php" method="GET">
         <div class="form-group">

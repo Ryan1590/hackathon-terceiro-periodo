@@ -1,6 +1,7 @@
 <?php
 
-$cpf = $_POST['cpf'];
+if(isset($_POST)){
+    $cpf = $_POST['cpf'];
 $nomeVacina = $_POST['vacinas']; 
 $dataHora = $_POST['dataHora']; 
 
@@ -37,6 +38,9 @@ if (curl_errno($ch)) {
     }
 }
 
-curl_close($ch);
+    curl_close($ch);
+
+    header('location: menuAgendamento.php');
+}
 
 ?>
