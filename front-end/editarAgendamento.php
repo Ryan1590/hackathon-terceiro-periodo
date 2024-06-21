@@ -53,7 +53,7 @@ if ($agendamento === null) {
 <div class="container">
     <div class="register-container p-4 bg-white rounded shadow">
         <h1 class="mb-4 text-center">Editar Agendamento</h1>
-        <form id="edit-form" action="./processa_edicao_agendamento.php" method="post">
+        <form id="edit-form" action="processa_edicao_agendamento" method="post">
             <input type="hidden" name="id" value="<?php echo htmlspecialchars($agendamento->id, ENT_QUOTES, 'UTF-8'); ?>">
             <div class="form-group input-group">
                 <label for="vacinas" class="visually-hidden">Vacinas</label>

@@ -40,7 +40,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     curl_close($ch);
 
-    header('Location: ?page=menuAgendamento');
+    header('Location: menuAgendamento');
     exit;
 }
 ?>

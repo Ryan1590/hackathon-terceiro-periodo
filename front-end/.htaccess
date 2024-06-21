@@ -1,2 +1,4 @@
 RewriteEngine On
-RewriteRule ^paginas/([a-zA-Z0-9_-]+)$ index.php?page=$1 [L]
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}\.php -f
+RewriteRule ^([^\.]+)/?$ $1.php [L]

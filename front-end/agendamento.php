@@ -35,7 +35,7 @@
 <div class="container">
     <div class="register-container p-4 bg-white rounded shadow">
         <h1 class="mb-4 text-center">Agendamento</h1>
-        <form id="register-form" action="./processa_agendamento.php" method="post">
+        <form id="register-form" action="processa_agendamento" method="post">
             <div class="form-group input-group">
                 <label for="cpf" class="visually-hidden">CPF</label>
                 <input type="text" id="cpf" name="cpf" class="form-control" placeholder="CPF" required autofocus>

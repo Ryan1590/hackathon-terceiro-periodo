@@ -26,6 +26,6 @@ if (curl_errno($ch) || $http_code != 200) {
 
 curl_close($ch);
 
-header('Location: menuAgendamento.php');
+header('Location: menuAgendamento');
 exit;
 ?>

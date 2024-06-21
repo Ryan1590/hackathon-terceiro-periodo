@@ -32,7 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $_SESSION['message_type'] = 'success';
     }
 
-    header('Location: menuAgendamento.php');
+    header('Location: menuAgendamento');
     exit;
 }
 ?>

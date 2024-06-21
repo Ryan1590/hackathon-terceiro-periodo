@@ -1,17 +1,3 @@
-<?php
-if (isset($_GET['page'])) {
-    $page = $_GET['page'];
-
-    $allowed_pages = ['agendamento', 'notificacao', 'menuAgendamento'];
-
-
-    if (in_array($page, $allowed_pages)) {
-        include $page . '.php';
-    } else {
-        echo 'Página não encontrada!';
-    }
-} else {
-?>
     <!DOCTYPE html>
     <html lang="pt-br">
 
@@ -35,10 +21,10 @@ if (isset($_GET['page'])) {
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item active">
-                    <a class="nav-link text-white fw-bold" href="?page=menuAgendamento">Agendamento</a>
+                    <a class="nav-link text-white fw-bold" href="menuAgendamento">Agendamento</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-white fw-bold" href="?page=notificacao">Notificação</a>
+                    <a class="nav-link text-white fw-bold" href="notificacao">Notificação</a>
                 </li>
             </ul>
         </div>
@@ -214,4 +200,3 @@ if (isset($_GET['page'])) {
 
 </body>
 </html>
-<?php } ?>

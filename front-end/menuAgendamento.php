@@ -38,7 +38,7 @@ session_start();
                     <a class="nav-link text-white fw-bold" href="./">Início</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-white fw-bold" href="?page=notificacao">Notificações</a>
+                    <a class="nav-link text-white fw-bold" href="notificacao">Notificações</a>
                 </li>
             </ul>
         </div>
@@ -48,10 +48,10 @@ session_start();
 <div class="container mt-4">
     <h2 class="text-center mt-4">Pesquisar Agendamentos</h2>
     <div class="d-flex justify-content-end mb-4 mt-4">
-        <a href="?page=agendamento" type="button" class="btn btn-primary mt-4 mb-4">Solicitar Agendamento</a>
+        <a href="agendamento" type="button" class="btn btn-primary mt-4 mb-4">Solicitar Agendamento</a>
     </div>
     <div class="card shadow p-4 mb-4">
-        <form class="mt-4" action="menuAgendamento.php" method="GET">
+    <form class="mt-4" method="GET" action="menuAgendamento">
             <div class="form-group mb-3">
                 <label for="cpf">CPF:</label>
                 <input type="text" class="form-control" id="cpf" name="cpf" placeholder="Digite o CPF" required>
@@ -148,7 +148,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['cpf'])) {
                     echo '<td>' . htmlspecialchars($agendamento['nomeVacina'], ENT_QUOTES, 'UTF-8') . '</td>';
                     echo '<td>' . htmlspecialchars($agendamento['status'], ENT_QUOTES, 'UTF-8') . '</td>';
                     echo '<td>';
-                    echo '<a href="editarAgendamento.php?id=' . $agendamento['id'] . '" class="btn btn-warning btn-sm">Editar</a> ';
+                    echo '<a href="editarAgendamento?id=' . $agendamento['id'] . '" class="btn btn-warning btn-sm">Editar</a> ';
                     echo '<a href="#" onclick="confirmarExclusao(' . $agendamento['id'] . ')" class="btn btn-danger btn-sm">Excluir</a>';
                     echo '</td>';
                     echo '</tr>';
@@ -189,7 +189,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['cpf'])) {
             cancelButtonText: 'Cancelar'
         }).then((result) => {
             if (result.isConfirmed) {
-                window.location.href = 'excluirAgendamento.php?id=' + id;
+                window.location.href = 'excluirAgendamento?id=' + id;
             }
         });
     }
