@@ -1,11 +1,11 @@
 <?php
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $nomeCompleto = $_POST['nomeCompleto'];
-    $email = $_POST['email'];
-    $nomeUsuario = $_POST['nomeUsuario'];
-    $password = $_POST['password'];
+    $cpf = $_POST['cpf'];
+    $vacinas = $_POST['vacinas'];
+    $dataHora = $_POST['dataHora'];
+  
 
-    $data = array('nomeCompleto' => $nomeCompleto, 'email' => $email, 'nomeUsuario' => $nomeUsuario, 'password' => $password);
+    $data = array('cpf' => $cpf, 'vacinas' => $vacinas, 'dataHora' => $dataHora);
     $data_json = json_encode($data);
 
    

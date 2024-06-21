@@ -2,7 +2,7 @@
 if (isset($_GET['page'])) {
     $page = $_GET['page'];
 
-    $allowed_pages = ['login', 'cadastroNovoUsuario', 'redefinirSenha'];
+    $allowed_pages = ['agendamento', 'notificacao'];
 
     if (in_array($page, $allowed_pages)) {
         include $page . '.php';
@@ -18,7 +18,6 @@ if (isset($_GET['page'])) {
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Página Inicial</title>
-        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
         <link rel="stylesheet" href="./css/index.css">
@@ -26,92 +25,95 @@ if (isset($_GET['page'])) {
 
     <body>
 
-    <div class="header text-center">
-        <div class="container mt-3">
-            <div class="row align-items-center">
-                <div class="col-4 d-flex justify-content-center align-items-center">
-                    <img class="mb-2" src="./img/zegotinha.jpeg" alt="logo" style="width: 70px;">
-                </div>
-                <div class="col-4 d-none d-md-block"></div>
-                <div class="col-4 d-flex justify-content-end align-items-center">
-                    <div class="dropdown">
-                        <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="fas fa-user me-2"></i>
-                        </button>
-                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton">
-                            <li><a class="dropdown-item" href="./redefinirSenha.php">Redefinir senha</a></li>
-                            <li><a class="dropdown-item" href="">Agendamento</a></li>
-                            <li><a class="dropdown-item" href="">Notificação</a></li>
-                            <li><a class="dropdown-item" href="">Informações</a></li>
-                            <li><a class="dropdown-item" href="./login.php">Sair</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div id="carouselExampleCaptions" class="carousel slide" style="max-height: 500px; width: 100%;">
-        <div class="carousel-inner">
-            <div class="carousel-item active">
-                <img src="./img/banner2-vacina-para-todos.png" class="d-block img-fluid" alt="Imagem" style="object-fit: cover; max-height: 500px; width: 100%; margin: 0; padding: 0;">
-            </div>
-            <div class="carousel-item ">
-                <img src="./img/imagemcarrosselcovid.jpeg" class="d-block img-fluid" alt="Imagem" style="object-fit: cover; max-height: 500px;  width: 100%; margin: 0; padding: 0;">
-            </div>
-            <div class="carousel-item">
-                <img src="./img/imagemcarrosselvacina.jpeg" class="d-block img-fluid" alt="Imagem" style="object-fit: cover; max-height: 500px;  width: 100%; margin: 0; padding: 0;">
-            </div>
-        </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
+<nav class="navbar navbar-expand-lg navbar-light bg-primary">
+    <div class="container">
+        <a class="navbar-brand ms-2" href="#"><img src="./img/zegotinha.jpeg" width="80px" alt="Logo"></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
         </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
-        </button>
-    </div>
-
-    <div class="wrapper">
-        <div class="container mt-4">
-            <h2 class="text-center mb-4 text-primary">Sobre a Vacinação</h2>
-            <p>
-                <strong>A vacinação é reconhecida como uma das mais eficazes estratégias</strong>
-                para preservar a saúde da população e fortalecer uma sociedade saudável e resistente. Além de prevenir doenças graves,
-                a imunização contribui para reduzir a disseminação desses agentes infecciosos na comunidade, protegendo aqueles que não podem ser vacinados por motivos de saúde.
-            </p>
-            <p>
-                <strong> O calendário nacional de vacinação contempla, na rotina dos serviços, 20 vacinas que protegem o indivíduo em todos ciclos de vida, desde o nascimento.</strong> Entre as doenças imunopreveníveis por essas vacinas estão a poliomielite,
-                sarampo, rubéola, tétano, coqueluche e outras doenças graves e muitas vezes fatais. O PNI é responsável por coordenar as campanhas anuais de vacinação. Essas campanhas têm como objetivo alcançar altas coberturas vacinais,
-                garantindo a proteção individual e coletiva contra diversas doenças. Assim, o Ministério da Saúde atua em conjunto com estados, municípios e o Distrito Federal para garantir o acesso equitativo às vacinas em todo o país.
-            </p>
-        </div>
-        <div class="container">
-            <img src="./img/bannerMovimentoVacina.png" alt="Banner" class="img-fluid">
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item active">
+                    <a class="nav-link text-white" href="?page=agendamento">Agendamento</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="#">Notificação</a>
+                </li>
+            </ul>
         </div>
     </div>
+</nav>
+  
+<div id="carouselAutomatico" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-indicators">
+        <button type="button" data-bs-target="#carouselAutomatico" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+        <button type="button" data-bs-target="#carouselAutomatico" data-bs-slide-to="1" aria-label="Slide 2"></button>
+        <button type="button" data-bs-target="#carouselAutomatico" data-bs-slide-to="2" aria-label="Slide 3"></button>
+        <button type="button" data-bs-target="#carouselAutomatico" data-bs-slide-to="3" aria-label="Slide 4"></button>
+    </div>
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            <img src="./img/imagemcarrossel1.png" class="d-block w-100" alt="Imagem 1">
+        </div>
+        <div class="carousel-item">
+            <img src="./img/imagemcarrossel2.png" class="d-block w-100" alt="Imagem 2">
+        </div>
+        <div class="carousel-item">
+            <img src="./img/imagemcarrossel3.png" class="d-block w-100" alt="Imagem 3">
+        </div>
+        <div class="carousel-item">
+            <img src="./img/imagemcarrossel4.png" class="d-block w-100" alt="Imagem 4">
+        </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselAutomatico" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselAutomatico" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </button>
+</div>
+
+<div class="wrapper">
+    <div class="container mt-4">
+        <h2 class="text-center mb-4 text-primary">Sobre a Vacinação</h2>
+        <p>
+            <strong>A vacinação é reconhecida como uma das mais eficazes estratégias</strong>
+            para preservar a saúde da população e fortalecer uma sociedade saudável e resistente. Além de prevenir doenças graves,
+            a imunização contribui para reduzir a disseminação desses agentes infecciosos na comunidade, protegendo aqueles que não podem ser vacinados por motivos de saúde.
+        </p>
+        <p>
+            <strong> O calendário nacional de vacinação contempla, na rotina dos serviços, 20 vacinas que protegem o indivíduo em todos ciclos de vida, desde o nascimento.</strong> Entre as doenças imunopreveníveis por essas vacinas estão a poliomielite,
+            sarampo, rubéola, tétano, coqueluche e outras doenças graves e muitas vezes fatais. O PNI é responsável por coordenar as campanhas anuais de vacinação. Essas campanhas têm como objetivo alcançar altas coberturas vacinais,
+            garantindo a proteção individual e coletiva contra diversas doenças. Assim, o Ministério da Saúde atua em conjunto com estados, municípios e o Distrito Federal para garantir o acesso equitativo às vacinas em todo o país.
+        </p>
+    </div>
+    <div class="container">
+        <img src="./img/bannerMovimentoVacina.png" alt="Banner" class="img-fluid">
+    </div>
+</div>
 
 
-    <div class="container mt-5">
-        <div class="row justify-content-center">
-            <div class="col-12 col-md-6 col-lg-4 mb-4">
-                <div class="p-3 border bg-light text-center">
-                    <a href="#" class="text-decoration-none text-dark cursor-pointer">Solicitar Agendamento</a>
-                </div>
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-6 col-lg-4 mb-4">
+            <div class="p-3 border bg-light text-center">
+                <a href="#" class="text-decoration-none text-dark cursor-pointer">Solicitar Agendamento</a>
             </div>
-            <div class="col-12 col-md-6 col-lg-4 mb-4">
-                <div class="p-3 border bg-light text-center">
-                    <a href="#" class="text-decoration-none text-dark cursor-pointer">Notificações</a>
-                </div>
+        </div>
+        <div class="col-12 col-md-6 col-lg-4 mb-4">
+            <div class="p-3 border bg-light text-center">
+                <a href="#" class="text-decoration-none text-dark cursor-pointer">Notificações</a>
             </div>
-            <div class="col-12 col-md-6 col-lg-4 mb-4">
-                <div class="p-3 border bg-light text-center">
-                    <a href="#" class="text-decoration-none text-dark cursor-pointer">Informações</a>
-                </div>
+        </div>
+        <div class="col-12 col-md-6 col-lg-4 mb-4">
+            <div class="p-3 border bg-light text-center">
+                <a href="#" class="text-decoration-none text-dark cursor-pointer">Informações</a>
             </div>
         </div>
     </div>
+</div>
 
 
 <div class="wrapper">
@@ -211,10 +213,8 @@ if (isset($_GET['page'])) {
     </div>
 </footer>
 
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
 </html>
