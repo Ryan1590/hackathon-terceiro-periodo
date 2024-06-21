@@ -45,9 +45,7 @@
                 <label for="vacinas" class="visually-hidden">Vacinas</label>
                 <select id="vacinas" name="vacinas" class="form-control" required>
                     <option value="">Selecione a vacina</option>
-                    <option value="vacina1">Vacina 1</option>
-                    <option value="vacina2">Vacina 2</option>
-                    <option value="vacina3">Vacina 3</option>
+                    
                 </select>
             </div>
             <div class="form-group input-group">

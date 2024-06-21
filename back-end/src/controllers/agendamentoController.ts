@@ -23,6 +23,7 @@ export const createAgendamento = async (req: Request, res: Response) => {
             idoso_id: idoso.id,
             vacina_id: vacina.id,
             data_hora_visita,
+            status: 'pendente'
         }).returning('id');
 
         return res.status(201).json({ message: 'Agendamento criado com sucesso', agendamentoId });
@@ -31,6 +32,7 @@ export const createAgendamento = async (req: Request, res: Response) => {
         return res.status(500).json({ message: 'Erro ao criar agendamento' });
     }
 };
+
 
 export const deleteAgendamento = async (req: Request, res: Response) => {
     try {
@@ -63,30 +65,7 @@ export const getAgendamentosByCpf = async (req: Request, res: Response) => {
             .leftJoin('vacina as v', 'a.vacina_id', 'v.id')
             .leftJoin('agente_saude as ag', 'a.agenteSaude_id', 'ag.id')
             .leftJoin('idoso as i', 'a.idoso_id', 'i.id')
-            .select('a.id', 'a.data_hora_visita', 'v.nome as nomeVacina', 'ag.nome as nomeAgente', 'i.nome as nomeIdoso');
-
-        return res.status(200).json(agendamentos);
-    } catch (error) {
-        console.error(error);
-        return res.status(500).json({ message: 'Erro ao buscar agendamentos' });
-    }
-};
-
-export const getAgendamentosByVacina = async (req: Request, res: Response) => {
-    try {
-        const { nomeVacina } = req.params;
-
-        const vacina = await db('vacina').where({ nome: nomeVacina }).first();
-        if (!vacina) {
-            return res.status(404).json({ message: 'Vacina não encontrada' });
-        }
-
-        const agendamentos = await db('agendamento as a')
-            .where('a.vacina_id', vacina.id)
-            .leftJoin('idoso as i', 'a.idoso_id', 'i.id')
-            .leftJoin('agente_saude as ag', 'a.agenteSaude_id', 'ag.id')
-            .leftJoin('vacina as v', 'a.vacina_id', 'v.id')
-            .select('a.id', 'a.data_hora_visita', 'i.nome as nomeIdoso', 'ag.nome as nomeAgente', 'v.nome as nomeVacina');
+            .select('a.id', 'a.data_hora_visita', 'v.nome as nomeVacina', 'ag.nome as nomeAgente', 'i.nome as nomeIdoso', 'a.status');
 
         return res.status(200).json(agendamentos);
     } catch (error) {
@@ -115,7 +94,7 @@ export const getAgendamentosByCpfAndVacina = async (req: Request, res: Response)
             .leftJoin('idoso as i', 'a.idoso_id', 'i.id')
             .leftJoin('agente_saude as ag', 'a.agenteSaude_id', 'ag.id')
             .leftJoin('vacina as v', 'a.vacina_id', 'v.id')
-            .select('a.id', 'a.data_hora_visita', 'i.nome as nomeIdoso', 'ag.nome as nomeAgente', 'v.nome as nomeVacina');
+            .select('a.id', 'a.data_hora_visita', 'i.nome as nomeIdoso', 'ag.nome as nomeAgente', 'v.nome as nomeVacina', 'a.status');
 
         return res.status(200).json(agendamentos);
     } catch (error) {
@@ -124,10 +103,34 @@ export const getAgendamentosByCpfAndVacina = async (req: Request, res: Response)
     }
 };
 
+export const getAgendamentoById = async (req: Request, res: Response) => {
+    try {
+        const { id } = req.params;
+
+        const agendamento = await db('agendamento as a')
+            .where('a.id', id)
+            .leftJoin('vacina as v', 'a.vacina_id', 'v.id')
+            .leftJoin('agente_saude as ag', 'a.agenteSaude_id', 'ag.id')
+            .leftJoin('idoso as i', 'a.idoso_id', 'i.id')
+            .select('a.id', 'a.data_hora_visita', 'v.nome as nomeVacina', 'ag.nome as nomeAgente', 'i.nome as nomeIdoso', 'a.status')
+            .first();
+
+        if (!agendamento) {
+            return res.status(404).json({ message: 'Agendamento não encontrado' });
+        }
+
+        return res.status(200).json(agendamento);
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({ message: 'Erro ao buscar agendamento' });
+    }
+};
+
+
 export const updateAgendamento = async (req: Request, res: Response) => {
     try {
         const { id } = req.params;
-        const { nomeVacina, data_hora_visita } = req.body;
+        const { nomeVacina, data_hora_visita, status } = req.body; // Adicionando status ao destructuring
 
         const agendamento = await db('agendamento').where({ id }).first();
         if (!agendamento) {
@@ -143,7 +146,13 @@ export const updateAgendamento = async (req: Request, res: Response) => {
             vacina_id = vacina.id;
         }
 
-        const rowsUpdated = await db('agendamento').where({ id }).update({ vacina_id, data_hora_visita });
+        const updateData = {
+            vacina_id,
+            data_hora_visita,
+            status,
+        };
+
+        const rowsUpdated = await db('agendamento').where({ id }).update(updateData);
 
         if (rowsUpdated) {
             return res.status(200).json({ message: 'Agendamento atualizado com sucesso' });
@@ -155,5 +164,8 @@ export const updateAgendamento = async (req: Request, res: Response) => {
         return res.status(500).json({ message: 'Erro ao atualizar agendamento' });
     }
 };
+
+
+
 
 

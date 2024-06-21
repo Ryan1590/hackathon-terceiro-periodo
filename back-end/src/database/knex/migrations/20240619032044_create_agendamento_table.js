@@ -9,6 +9,7 @@ exports.up = function(knex) {
         table.integer('idoso_id').unsigned().notNullable();
         table.integer('vacina_id').unsigned().notNullable();
         table.dateTime('data_hora_visita').notNullable();
+        table.string('status').notNullable();
 
         table.foreign('agenteSaude_id').references('id').inTable('agente_saude');
         table.foreign('idoso_id').references('id').inTable('idoso');

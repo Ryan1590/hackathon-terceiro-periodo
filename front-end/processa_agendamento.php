@@ -1,30 +1,42 @@
 <?php
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $cpf = $_POST['cpf'];
-    $vacinas = $_POST['vacinas'];
-    $dataHora = $_POST['dataHora'];
-  
 
-    $data = array('cpf' => $cpf, 'vacinas' => $vacinas, 'dataHora' => $dataHora);
-    $data_json = json_encode($data);
+$cpf = $_POST['cpf'];
+$nomeVacina = $_POST['vacinas']; 
+$dataHora = $_POST['dataHora']; 
 
-   
-    echo "<pre>";
-    print_r($data_json);
-    echo "</pre>";
+$data = array(
+    'cpf' => $cpf,
+    'nomeVacina' => $nomeVacina,
+    'data_hora_visita' => $dataHora,
+);
 
-    $url = 'http://localhost:3000/submit';
+$url = 'http://localhost:3000/agendamentos';
 
-    $ch = curl_init($url);
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-    curl_setopt($ch, CURLOPT_POST, true);
-    curl_setopt($ch, CURLOPT_POSTFIELDS, $data_json);
-    curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
+$ch = curl_init($url);
 
-    $response = curl_exec($ch);
-    curl_close($ch);
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
 
-    echo "Resposta do servidor: " . $response;
+curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+    'Content-Type: application/json',
+    'Content-Length: ' . strlen(json_encode($data))
+));
+
+$response = curl_exec($ch);
+
+if (curl_errno($ch)) {
+    echo 'Erro na requisição: ' . curl_error($ch);
+    http_response_code(500);
+} else {
+    $statusCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+
+    if ($statusCode == 201) { 
+        echo 'Agendamento criado com sucesso!';
+    } else {
+        echo 'Erro ao criar agendamento. Status: ' . $statusCode;
+    }
 }
-?>
 
+curl_close($ch);
+
+?>
