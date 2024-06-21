@@ -45,7 +45,6 @@ session_start();
     </div>
 </nav>
 
-
 <div class="container mt-4">
     <h2 class="text-center mt-4">Pesquisar Agendamentos</h2>
     <div class="d-flex justify-content-end mb-4 mt-4">

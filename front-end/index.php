@@ -2,7 +2,7 @@
 if (isset($_GET['page'])) {
     $page = $_GET['page'];
 
-    $allowed_pages = ['agendamento', 'notificacao', 'menuAgendamento', 'agendamento'];
+    $allowed_pages = ['agendamento', 'notificacao', 'menuAgendamento'];
 
 
     if (in_array($page, $allowed_pages)) {

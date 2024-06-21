@@ -37,7 +37,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     curl_close($ch);
 
-    header('Location: menuAgendamento.php');
+    header('Location: ?page=menuAgendamento');
     exit;
 }
 ?>
