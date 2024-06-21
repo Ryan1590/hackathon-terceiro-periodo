@@ -2,7 +2,7 @@
 if (isset($_GET['page'])) {
     $page = $_GET['page'];
 
-    $allowed_pages = ['agendamento', 'notificacao'];
+    $allowed_pages = ['agendamento', 'notificacao', 'notificacao'];
 
     if (in_array($page, $allowed_pages)) {
         include $page . '.php';
@@ -37,7 +37,7 @@ if (isset($_GET['page'])) {
                     <a class="nav-link text-white fw-bold" href="?page=agendamento">Agendamento</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-white fw-bold" href="#">Notificação</a>
+                    <a class="nav-link text-white fw-bold" href="?page=notificacao">Notificação</a>
                 </li>
             </ul>
         </div>

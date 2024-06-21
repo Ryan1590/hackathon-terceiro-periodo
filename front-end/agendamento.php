@@ -21,10 +21,10 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ms-auto">
             <li class="nav-item active">
-                    <a class="nav-link text-white fw-bold" href="./">Inico</a>
+                    <a class="nav-link text-white fw-bold" href="./">Home</a>
                 </li>
                 <li class="nav-item ">
-                    <a class="nav-link text-white fw-bold" href="./notificacao">Notificaçãoes</a>
+                    <a class="nav-link text-white fw-bold" href="?page=notificacao">Notificaçãoes</a>
                 </li>
             </ul>
         </div>
