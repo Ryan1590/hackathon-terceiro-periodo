@@ -35,7 +35,7 @@
                     <a class="nav-link text-white fw-bold" href="./">Início</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-white fw-bold" href="./notificacao">Notificações</a>
+                    <a class="nav-link text-white fw-bold" href="?page=notificacao">Notificações</a>
                 </li>
             </ul>
         </div>

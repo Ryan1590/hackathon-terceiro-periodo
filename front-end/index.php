@@ -105,7 +105,7 @@ if (isset($_GET['page'])) {
         </div>
         <div class="col-12 col-md-6 col-lg-4 mb-4">
             <div class="p-3 border bg-light text-center">
-                <a href="#" class="text-decoration-none text-dark cursor-pointer">Notificações</a>
+                <a href="?page=notificacao" class="text-decoration-none text-dark cursor-pointer">Notificações</a>
             </div>
         </div>
         <div class="col-12 col-md-6 col-lg-4 mb-4">
