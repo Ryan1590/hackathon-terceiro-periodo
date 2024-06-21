@@ -31,7 +31,6 @@
         </div>
     </nav>
   
-
     <br><br>
     <div class="container">
     <div class="register-container p-4 bg-white rounded shadow">
@@ -45,11 +44,18 @@
                 <label for="vacinas" class="visually-hidden">Vacinas</label>
                 <select id="vacinas" name="vacinas" class="form-control" required>
                     <option value="">Selecione a vacina</option>
-                    <option value="vacina1">Vacina 1</option>
-                    <option value="vacina2">Vacina 2</option>
-                    <option value="vacina3">Vacina 3</option>
+                    <?php
+                        $url = 'http://localhost:3000/vacinas';
+                        $vacinas = file_get_contents($url);
+                        $vacinas = json_decode($vacinas);
+    
+                        foreach ($vacinas as $vacina) {
+                            echo "<option value='" . $vacina->id . "'>" . $vacina->nome . "</option>";
+                        }
+                    ?>
                 </select>
             </div>
+
             <div class="form-group input-group">
                 <label for="dataHora" class="visually-hidden">Data e Hora</label>
                 <input type="datetime-local" id="dataHora" name="dataHora" class="form-control" required>
@@ -61,6 +67,7 @@
         </div>
     </div>
 </div>
+
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
