@@ -13,23 +13,23 @@
 <body>
 
 <nav class="navbar navbar-expand-lg navbar-light bg-primary">
-        <div class="container">
-            <a class="navbar-brand ms-2" href="#"><img src="./img/zegotinha.jpeg" width="80px" alt="Logo"></a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarResponsive">
-                <ul class="navbar-nav ms-auto">
-                <li class="nav-item active">
-                        <a class="nav-link text-white fw-bold" href="./">Inico</a>
-                    </li>
-                    <li class="nav-item ">
-                        <a class="nav-link text-white fw-bold" href="./notificacao">Notificaçãoes</a>
-                    </li>
-                </ul>
-            </div>
+    <div class="container">
+        <a class="navbar-brand ms-2" href="#"><img src="./img/zegotinha.jpeg" width="80px" alt="Logo"></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ms-auto">
+            <li class="nav-item active">
+                    <a class="nav-link text-white fw-bold" href="./">Inico</a>
+                </li>
+                <li class="nav-item ">
+                    <a class="nav-link text-white fw-bold" href="./notificacao">Notificaçãoes</a>
+                </li>
+            </ul>
         </div>
-    </nav>
+    </div>
+</nav>
   
     <br><br>
     <div class="container">
