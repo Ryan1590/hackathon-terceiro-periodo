@@ -27,10 +27,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $response = curl_exec($ch);
     $http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 
-    if (curl_errno($ch) || $http_code != 200) {
-        $_SESSION['message'] = 'Erro ao incluir o agendamento. Código HTTP: ' . $http_code;
+    if (curl_errno($ch) || $http_code == 404) {
+        $_SESSION['message'] = 'Esse cpf nao está cadastrado';
         $_SESSION['message_type'] = 'error';
-    } else {
+    } elseif(curl_errno($ch) || $http_code == 500) {
+        $_SESSION['message'] = 'Um erro inesperado aconteceu, contate o suporte.';
+        $_SESSION['message_type'] = 'error';
+    }else{
         $_SESSION['message'] = 'Agendamento incluído com sucesso.';
         $_SESSION['message_type'] = 'success';
     }
