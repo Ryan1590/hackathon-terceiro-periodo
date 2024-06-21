@@ -13,15 +13,19 @@
             margin: 0;
             padding: 0;
             background-color: #f4f4f4;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
         }
         header {
-            background-color: #333;
+            background-color: blue;
             color: #fff;
             padding: 10px;
             text-align: center;
         }
         main {
             padding: 20px;
+            flex-grow: 1;
         }
         .alertas-container {
             background-color: #fff;
@@ -41,6 +45,15 @@
         }
         .lembrete-item {
             margin-bottom: 10px;
+        }
+        .footer {
+            background-color: black;
+            display: flex;
+            text-align: center;
+            align-items: center;
+            height: 60px;
+            justify-content: center;
+            color: white;
         }
     </style>
 </head>
@@ -65,72 +78,32 @@
     </div>
 </nav>
 
-
-    <header>
-        <h1>Alertas e Lembretes de Vacinação</h1>
-    </header>
-    <main>
-        <div class="alertas-container">
-            <h2>Próximas Vacinas</h2>
-            <div id="alertas-lista">
-                <!-- Aqui serão inseridos os alertas de vacinação -->
-            </div>
-        </div>
-        <div class="lembretes-container">
-            <h2>Lembretes de Vacinação</h2>
-            <div id="lembretes-lista">
-                <!-- Aqui serão inseridos os lembretes de vacinação -->
-            </div>
-        </div>
-    </main>
-    <footer>
-        <p>&copy; 2024 Sua Empresa. Todos os direitos reservados.</p>
-    </footer>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const alertasLista = document.getElementById('alertas-lista');
-            const lembretesLista = document.getElementById('lembretes-lista');
-
-            // Simulando dados de alertas de vacinação
-            const alertasData = [
-                { id: 1, data: '01/08/2024', vacina: 'Vacina A' },
-                { id: 2, data: '10/08/2024', vacina: 'Vacina B' },
-                { id: 3, data: '15/08/2024', vacina: 'Vacina C' },
-            ];
-
-            // Simulando dados de lembretes de vacinação
-            const lembretesData = [
-                { id: 1, data: '30/07/2024', vacina: 'Vacina D' },
-                { id: 2, data: '05/08/2024', vacina: 'Vacina E' },
-                { id: 3, data: '12/08/2024', vacina: 'Vacina F' },
-            ];
-
-            // Função para exibir os alertas de vacinação na tela
-            function exibirAlertas() {
-                alertasLista.innerHTML = '';
-                alertasData.forEach(alerta => {
-                    const item = document.createElement('div');
-                    item.classList.add('alerta-item');
-                    item.innerHTML = `<strong>Próxima vacina:</strong> ${alerta.vacina} - <strong>Data:</strong> ${alerta.data}`;
-                    alertasLista.appendChild(item);
-                });
+<header class="mt-4">
+    <h1>Alertas e Lembretes de Vacinação Atenção!</h1>
+</header>
+<main>
+    <div class="alertas-container">
+        <h2>Próximas Vacinas</h2>
+        <div id="alertas-lista">
+        <?php
+            $url = 'http://localhost:3000/vacinas';
+            $vacinas = file_get_contents($url);
+            $vacinas = json_decode($vacinas);
+            foreach ($vacinas as $vacina) {
+                echo " Vacina $vacina->nome<br>  ";
             }
+        ?>
+        </div>
+    </div>
+</main>
 
-           
-            function exibirLembretes() {
-                lembretesLista.innerHTML = '';
-                lembretesData.forEach(lembrete => {
-                    const item = document.createElement('div');
-                    item.classList.add('lembrete-item');
-                    item.innerHTML = `<strong>Lembrete:</strong> ${lembrete.vacina} - <strong>Data:</strong> ${lembrete.data}`;
-                    lembretesLista.appendChild(item);
-                });
-            }
+<footer class="footer">
+    <div class="container">
+        <span>© 2024 Todos os direitos reservados.</span>
+    </div>
+</footer>
 
-            exibirAlertas();
-            exibirLembretes();
-        });
-    </script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
