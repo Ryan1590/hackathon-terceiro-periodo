@@ -34,10 +34,10 @@ if (isset($_GET['page'])) {
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item active">
-                    <a class="nav-link text-white" href="?page=agendamento">Agendamento</a>
+                    <a class="nav-link text-white fw-bold" href="?page=agendamento">Agendamento</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-white" href="#">Notificação</a>
+                    <a class="nav-link text-white fw-bold" href="#">Notificação</a>
                 </li>
             </ul>
         </div>
@@ -99,7 +99,7 @@ if (isset($_GET['page'])) {
     <div class="row justify-content-center">
         <div class="col-12 col-md-6 col-lg-4 mb-4">
             <div class="p-3 border bg-light text-center">
-                <a href="#" class="text-decoration-none text-dark cursor-pointer">Solicitar Agendamento</a>
+                <a href="?page=agendamento" class="text-decoration-none text-dark cursor-pointer">Solicitar Agendamento</a>
             </div>
         </div>
         <div class="col-12 col-md-6 col-lg-4 mb-4">
@@ -185,6 +185,7 @@ if (isset($_GET['page'])) {
     </div>
 </div>
 
+<br><br>
 <div class="container d-container">
     <div class="link-container">
         <div class="d-box-1">
