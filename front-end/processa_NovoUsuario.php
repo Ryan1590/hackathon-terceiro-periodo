@@ -13,7 +13,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     print_r($data_json);
     echo "</pre>";
 
-    $url = 'http://localhost:3000/submit'; 
+    $url = 'http://localhost:3000/submit';
 
     $ch = curl_init($url);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
