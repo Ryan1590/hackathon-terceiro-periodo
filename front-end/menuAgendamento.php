@@ -1,3 +1,7 @@
+<?php
+session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -7,7 +11,6 @@
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
-    <!-- Incluindo SweetAlert2 -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <style>
         .form-group {
@@ -74,8 +77,22 @@
     </form>
 </div>
 
-
 <?php
+if (isset($_SESSION['message'])) {
+    $message = $_SESSION['message'];
+    $message_type = $_SESSION['message_type'];
+    echo "<script>
+        Swal.fire({
+            title: '".($message_type == 'success' ? 'Sucesso' : 'Erro')."',
+            text: '".$message."',
+            icon: '".$message_type."',
+            confirmButtonText: 'OK'
+        });
+    </script>";
+    unset($_SESSION['message']);
+    unset($_SESSION['message_type']);
+}
+
 if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['cpf'])) {
     $cpf = $_GET['cpf'];
     $vacina = isset($_GET['vacina']) ? $_GET['vacina'] : null;
@@ -88,55 +105,68 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['cpf'])) {
     $response = @file_get_contents($url);
 
     if ($response !== false) {
-        $agendamentos = json_decode($response);
+        $responseData = json_decode($response, true);
 
-        if (!empty($agendamentos)) {
+        if (isset($responseData['message'])) {
             echo '<div class="container mt-4">';
-            echo '<h2 class="text-center mb-4">Resultados da Pesquisa</h2>';
-            echo '<div class="table-responsive">';
-            echo '<table class="table table-bordered">';
-            echo '<thead class="table-dark">';
-            echo '<tr>';
-            echo '<th scope="col">Paciente</th>';
-            echo '<th scope="col">Data</th>';
-            echo '<th scope="col">Hora</th>';
-            echo '<th scope="col">Nome da Vacina</th>';
-            echo '<th scope="col">Status</th>';
-            echo '<th scope="col">Ações</th>';
-            echo '</tr>';
-            echo '</thead>';
-            echo '<tbody>';
-
-            foreach ($agendamentos as $agendamento) {
-                $dataHora = new DateTime($agendamento->data_hora_visita, new DateTimeZone('UTC'));
-                $dataHora->setTimezone(new DateTimeZone('America/Sao_Paulo'));
-                $data = $dataHora->format('d/m/Y');
-                $hora = $dataHora->format('H:i');
-                echo '<tr>';
-                echo '<td>' . htmlspecialchars($agendamento->nomeIdoso, ENT_QUOTES, 'UTF-8') . '</td>';
-                echo '<td>' . $data . '</td>';
-                echo '<td>' . $hora . '</td>';
-                echo '<td>' . htmlspecialchars($agendamento->nomeVacina, ENT_QUOTES, 'UTF-8') . '</td>';
-                echo '<td>' . htmlspecialchars($agendamento->status, ENT_QUOTES, 'UTF-8') . '</td>';
-                echo '<td>';
-                echo '<a href="editarAgendamento.php?id=' . $agendamento->id . '" class="btn btn-warning btn-sm">Editar</a> ';
-                echo '<a href="#" onclick="confirmarExclusao(' . $agendamento->id . ')" class="btn btn-danger btn-sm">Excluir</a>';
-                echo '</td>';
-                echo '</tr>';
-            }
-
-            echo '</tbody>';
-            echo '</table>';
+            echo '<div class="alert alert-info text-center" role="alert">';
+            echo htmlspecialchars($responseData['message'], ENT_QUOTES, 'UTF-8');
             echo '</div>';
             echo '</div>';
         } else {
-            echo '<div class="container mt-4">';
-            echo '<h2 class="text-center mb-4">Nenhum agendamento encontrado para o CPF ' . htmlspecialchars($cpf) . '</h2>';
-            echo '</div>';
+            $agendamentos = $responseData;
+            if (!empty($agendamentos)) {
+                echo '<div class="container mt-4">';
+                echo '<h2 class="text-center mb-4">Resultados da Pesquisa</h2>';
+                echo '<div class="table-responsive">';
+                echo '<table class="table table-bordered">';
+                echo '<thead class="table-dark">';
+                echo '<tr>';
+                echo '<th scope="col">Paciente</th>';
+                echo '<th scope="col">Data</th>';
+                echo '<th scope="col">Hora</th>';
+                echo '<th scope="col">Nome da Vacina</th>';
+                echo '<th scope="col">Status</th>';
+                echo '<th scope="col">Ações</th>';
+                echo '</tr>';
+                echo '</thead>';
+                echo '<tbody>';
+
+                foreach ($agendamentos as $agendamento) {
+                    $dataHora = new DateTime($agendamento['data_hora_visita'], new DateTimeZone('UTC'));
+                    $dataHora->setTimezone(new DateTimeZone('America/Sao_Paulo'));
+                    $data = $dataHora->format('d/m/Y');
+                    $hora = $dataHora->format('H:i');
+                    echo '<tr>';
+                    echo '<td>' . htmlspecialchars($agendamento['nomeIdoso'], ENT_QUOTES, 'UTF-8') . '</td>';
+                    echo '<td>' . $data . '</td>';
+                    echo '<td>' . $hora . '</td>';
+                    echo '<td>' . htmlspecialchars($agendamento['nomeVacina'], ENT_QUOTES, 'UTF-8') . '</td>';
+                    echo '<td>' . htmlspecialchars($agendamento['status'], ENT_QUOTES, 'UTF-8') . '</td>';
+                    echo '<td>';
+                    echo '<a href="editarAgendamento.php?id=' . $agendamento['id'] . '" class="btn btn-warning btn-sm">Editar</a> ';
+                    echo '<a href="#" onclick="confirmarExclusao(' . $agendamento['id'] . ')" class="btn btn-danger btn-sm">Excluir</a>';
+                    echo '</td>';
+                    echo '</tr>';
+                }
+
+                echo '</tbody>';
+                echo '</table>';
+                echo '</div>';
+                echo '</div>';
+            } else {
+                echo '<div class="container mt-4">';
+                echo '<div class="alert alert-danger text-center" role="alert">';
+                echo 'Nenhum agendamento encontrado para o CPF ' . htmlspecialchars($cpf);
+                echo '</div>';
+                echo '</div>';
+            }
         }
     } else {
         echo '<div class="container mt-4">';
-        echo '<h2 class="text-center mb-4">Erro ao buscar agendamentos. Verifique o CPF ou tente novamente mais tarde.</h2>';
+        echo '<div class="alert alert-danger text-center" role="alert">';
+        echo 'Erro ao buscar agendamentos. Verifique o CPF ou tente novamente mais tarde.';
+        echo '</div>';
         echo '</div>';
     }
 }

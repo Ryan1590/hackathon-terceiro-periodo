@@ -26,7 +26,7 @@ export const createAgendamento = async (req: Request, res: Response) => {
             status: 'pendente'
         }).returning('id');
 
-        return res.status(201).json({ message: 'Agendamento criado com sucesso', agendamentoId });
+        return res.status(200).json({ message: 'Agendamento criado com sucesso', agendamentoId });
     } catch (error) {
         console.error(error);
         return res.status(500).json({ message: 'Erro ao criar agendamento' });
