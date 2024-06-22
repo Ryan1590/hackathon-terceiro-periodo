@@ -19,6 +19,8 @@ body {
     height: 60px;
 }
 
+/*div de auvidoria geral, estilização*/
+
 .container.d-container {
     display: flex;
     justify-content: center;
@@ -81,3 +83,42 @@ body {
         font-size: 1em;
     }
 }
+/*div de auvidoria geral, estilização fim*/
+
+
+/* Estilos header*/
+.navbar {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+
+.navbar-nav .nav-link {
+    transition: color 0.3s ease, background-color 0.3s ease;
+    padding: 10px 15px;
+    border-radius: 5px;
+}
+
+
+.navbar-nav .nav-link:hover {
+    color: #ffffff;
+    background-color: #007bff; 
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2); 
+}
+
+
+.navbar-nav .nav-item.active .nav-link {
+    color: #ffffff;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2); 
+}
+
+
+.navbar-brand img {
+    border-radius: 50%;
+    transition: transform 0.3s ease;
+}
+
+
+.navbar-brand img:hover {
+    transform: scale(1.1); 
+}
+/* fim Estilos header*/

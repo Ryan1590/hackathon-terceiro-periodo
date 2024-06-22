@@ -8,6 +8,7 @@
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="./css/agendamento.css">
 </head>
 
 <body>
@@ -24,7 +25,10 @@
                     <a class="nav-link text-white fw-bold" href="./">Home</a>
                 </li>
                 <li class="nav-item ">
-                    <a class="nav-link text-white fw-bold" href="?page=notificacao">Notificaçãoes</a>
+                    <a class="nav-link text-white fw-bold" href="menuAgendamento">Consulta Agendamento</a>
+                </li>
+                <li class="nav-item ">
+                    <a class="nav-link text-white fw-bold" href="notificacao">Notificaçãoes</a>
                 </li>
             </ul>
         </div>

@@ -19,14 +19,17 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
-            <ul class="navbar-nav ms-auto">
-                <li class="nav-item active">
-                    <a class="nav-link text-white fw-bold" href="menuAgendamento">Agendamento</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-white fw-bold" href="notificacao">Notificação</a>
-                </li>
-            </ul>
+        <ul class="navbar-nav ms-auto">
+            <li class="nav-item active">
+                <a class="nav-link text-white fw-bold" href="agendamento">Agendamento</a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link text-white fw-bold" href="menuAgendamento">Pesquisa Agendamento</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-white fw-bold" href="notificacao">Notificação</a>
+            </li>
+        </ul>
         </div>
     </div>
 </nav>
@@ -83,23 +86,29 @@
 
 
 <div class="container mt-5">
-    <div class="row justify-content-center">
-        <div class="col-12 col-md-6 col-lg-4 mb-4">
-            <div class="p-3 border bg-light text-center">
-                <a href="?page=agendamento" class="text-decoration-none text-dark cursor-pointer">Solicitar Agendamento</a>
+        <div class="row justify-content-center">
+            <div class="col-12 col-md-6 col-lg-4 mb-4">
+                <a href="agendamento" class="text-decoration-none">
+                    <div class="p-3 border bg-light text-center cursor-pointer">
+                        <span class="text-dark">Solicitar Agendamento</span>
+                    </div>
+                </a>
+            </div>
+            <div class="col-12 col-md-6 col-lg-4 mb-4">
+                <a href="notificacao" class="text-decoration-none">
+                    <div class="p-3 border bg-light text-center cursor-pointer">
+                        <span class="text-dark">Notificações</span>
+                    </div>
+                </a>
+            </div>
+            <div class="col-12 col-md-6 col-lg-4 mb-4">
+                <a href="menuAgendamento" class="text-decoration-none">
+                    <div class="p-3 border bg-light text-center cursor-pointer">
+                        <span class="text-dark">Consulta Agendamento</span>
+                    </div>
+                </a>
             </div>
         </div>
-        <div class="col-12 col-md-6 col-lg-4 mb-4">
-            <div class="p-3 border bg-light text-center">
-                <a href="?page=notificacao" class="text-decoration-none text-dark cursor-pointer">Notificações</a>
-            </div>
-        </div>
-        <div class="col-12 col-md-6 col-lg-4 mb-4">
-            <div class="p-3 border bg-light text-center">
-                <a href="#" class="text-decoration-none text-dark cursor-pointer">Informações</a>
-            </div>
-        </div>
-    </div>
 </div>
 
 

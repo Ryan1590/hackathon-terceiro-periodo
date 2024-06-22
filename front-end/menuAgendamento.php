@@ -11,17 +11,8 @@ session_start();
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="./css/menuAgendamento.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <style>
-        .form-group {
-            display: flex;
-            align-items: center;
-        }
-        .form-group label {
-            width: 80px;
-            margin-right: 10px;
-        }
-    </style>
 </head>
 
 <body>
@@ -35,7 +26,10 @@ session_start();
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item active">
-                    <a class="nav-link text-white fw-bold" href="./">Início</a>
+                    <a class="nav-link text-white fw-bold" href="./">Home</a>
+                </li>
+                <li class="nav-item ">
+                    <a class="nav-link text-white fw-bold" href="agendamento">Agendamento</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link text-white fw-bold" href="notificacao">Notificações</a>
@@ -47,10 +41,8 @@ session_start();
 
 <div class="container mt-4">
     <h2 class="text-center mt-4">Pesquisar Agendamentos</h2>
-    <div class="d-flex justify-content-end mb-4 mt-4">
-        <a href="agendamento" type="button" class="btn btn-primary mt-4 mb-4">Solicitar Agendamento</a>
-    </div>
-    <div class="card shadow p-4 mb-4">
+    <div class="card shadow p-4 mb-4 mt-4">
+    <div class="mt-4"></div>
     <form class="mt-4" method="GET" action="menuAgendamento">
             <div class="form-group mb-3">
                 <label for="cpf">CPF:</label>
