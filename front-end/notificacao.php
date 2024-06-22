@@ -33,11 +33,7 @@
     </div>
 </nav>
 
-<div class="wrapper">
-    <div class="container mt-4 d-flex justify-content-center">
-        <p class="fw-bold">Atenção aos Lembretes!</p>
-    </div>
-</div>
+<h2 class="text-center mt-4">Notificaçãoes</h2>
 
 <main>
     <div class="alertas-container">
