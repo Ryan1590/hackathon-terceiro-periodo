@@ -122,3 +122,8 @@ body {
     transform: scale(1.1); 
 }
 /* fim Estilos header*/
+
+
+.p-3.border.bg-light.text-center.cursor-pointer:hover {
+    background-color: #a0ceff !important;
+}
