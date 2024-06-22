@@ -71,7 +71,7 @@
                     <a class="nav-link text-white fw-bold" href="./">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-white fw-bold" href="?page=agendamento">Agendamento</a>
+                    <a class="nav-link text-white fw-bold" href="agendamento">Agendamento</a>
                 </li>
             </ul>
         </div>
