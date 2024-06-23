@@ -6,7 +6,7 @@ const knexConfig = require('../../knexfile');
 const db = knex(knexConfig.development);
 
 export const getAllVacinas = async (req: Request, res: Response) => {
-    const cpf = req.query.cpf;  // Certifique-se de que está lendo o parâmetro corretamente
+    const cpf = req.query.cpf as string;
 
     if (!cpf) {
         return res.status(400).json({ message: 'CPF é necessário' });
@@ -16,6 +16,14 @@ export const getAllVacinas = async (req: Request, res: Response) => {
         const idoso = await db('idoso').where({ cpf }).first();
         if (!idoso) {
             return res.status(404).json({ message: 'Idoso não encontrado' });
+        }
+
+        const vacinaAceita = await db('agendamento')
+            .where({ idoso_id: idoso.id, status: 'Pendente' })
+            .first();
+
+        if (!vacinaAceita) {
+            return res.status(403).json({ message: 'Acesso negado. Nenhuma vacina com status pendente encontrada.' });
         }
 
         const vacinas = await db('agendamento')

@@ -94,7 +94,7 @@
                 })
                 .catch(error => {
                     console.error('Erro:', error);
-                    alert('Erro ao buscar vacinas. Por favor, tente novamente.');
+                    alert('Nenhuma vacina com status pendente encontrada para esse cpf');
                 });
         });
 
