@@ -3,6 +3,7 @@ package Views;
 import Controllers.AgendamentoController;
 import Models.AgendamentoModel;
 import Models.AgenteSaudeModel;
+import Models.DataBase;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -11,7 +12,6 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Connection;
-import Models.DataBase;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.text.ParseException;
@@ -33,6 +33,7 @@ public class AgendamentoView extends JFrame {
     private JButton buttonAgenteSaudeView;
     private JButton buttonIdosoView;
     private JButton buttonVacinaView;
+    private JButton buttonNotificacoes; // Novo botão para abrir NotificacaoView
     private JTable table;
 
     private AgendamentoController controller;
@@ -122,29 +123,29 @@ public class AgendamentoView extends JFrame {
         // Painel direito para botões, tabela e pesquisa com BorderLayout
         JPanel panelRight = new JPanel(new BorderLayout());
 
-        // Subpainel para os botões
-// Subpainel para os botões com GridLayout
+        // Subpainel para os botões com GridLayout
         JPanel panelBotoes = new JPanel(new GridLayout(1, 0, 5, 5)); // 1 linha, ajuste automático de colunas, com espaçamento entre componentes
 
         buttonAtualizar = new JButton("Atualizar");
         buttonPesquisar = new JButton("Pesquisar");
-        buttonAgenteSaudeView = new JButton("Ver Agentes");
-        buttonVacinaView = new JButton("Ver Vacinas");
-        buttonIdosoView = new JButton("Ver Idosos");
+        buttonAgenteSaudeView = new JButton("Agentes");
+        buttonVacinaView = new JButton("Vacinas");
+        buttonIdosoView = new JButton("Idosos");
+        buttonNotificacoes = new JButton("Notificações"); // Botão para abrir NotificacaoView
 
-// Redimensionando os botões para um tamanho menor
         buttonAtualizar.setPreferredSize(new Dimension(90, 25));
         buttonPesquisar.setPreferredSize(new Dimension(90, 25));
         buttonAgenteSaudeView.setPreferredSize(new Dimension(120, 25));
         buttonVacinaView.setPreferredSize(new Dimension(90, 25));
         buttonIdosoView.setPreferredSize(new Dimension(90, 25));
+        buttonNotificacoes.setPreferredSize(new Dimension(120, 25)); // Ajuste de tamanho do botão
 
         panelBotoes.add(buttonAtualizar);
         panelBotoes.add(buttonPesquisar);
         panelBotoes.add(buttonAgenteSaudeView);
         panelBotoes.add(buttonVacinaView);
         panelBotoes.add(buttonIdosoView);
-
+        panelBotoes.add(buttonNotificacoes); // Adicionar botão à interface
 
         // Adicionando o painel de botões ao painel direito
         panelRight.add(panelBotoes, BorderLayout.NORTH);
@@ -217,6 +218,15 @@ public class AgendamentoView extends JFrame {
             }
         });
 
+        // Listener para abrir NotificacaoView
+        buttonNotificacoes.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Criar e exibir a NotificacaoView
+                NotificacaoView notificacaoView = new NotificacaoView();
+                notificacaoView.setVisible(true);
+            }
+        });
 
         // Configurar seleção na tabela
         table.getSelectionModel().addListSelectionListener(e -> selecionarAgendamento());
@@ -263,7 +273,6 @@ public class AgendamentoView extends JFrame {
         table.setModel(model);
     }
 
-
     // Método para formatar a data e hora
     private String formatarDataHora(Timestamp dataHoraVisita) {
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
@@ -305,7 +314,6 @@ public class AgendamentoView extends JFrame {
         comboBoxStatus.setSelectedIndex(0); // Definir para "Pendente"
         table.clearSelection(); // Limpar seleção da tabela
     }
-
 
     // Método para selecionar um agendamento na tabela
     private void selecionarAgendamento() {
@@ -374,8 +382,6 @@ public class AgendamentoView extends JFrame {
                     "Erro", JOptionPane.ERROR_MESSAGE);
         }
     }
-
-
 
     // Método para pesquisar um agendamento pelo ID
     private void pesquisarAgendamento() {

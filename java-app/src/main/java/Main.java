@@ -6,7 +6,6 @@ import Models.DataBase;
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
-            // Configuração da conexão com o banco de dados
             Connection connection = null;
             try {
                 connection = DataBase.connection();
