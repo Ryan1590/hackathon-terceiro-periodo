@@ -79,6 +79,22 @@ public class AgenteSaudeModel {
         return false;
     }
 
+    // Método para obter os nomes de todos os agentes de saúde
+    public static List<String> getNomesAgentesSaude() throws SQLException {
+        List<String> nomes = new ArrayList<>();
+        try (Connection connection = DataBase.connection();
+             Statement statement = connection.createStatement();
+             ResultSet resultSet = statement.executeQuery("SELECT nome FROM agente_saude")) {
+
+            while (resultSet.next()) {
+                String nome = resultSet.getString("nome");
+                nomes.add(nome);
+            }
+        }
+        return nomes;
+    }
+
+
 
     // Método para obter todos os agentes de saúde do banco de dados
     public static List<AgenteSaudeModel> getAgentesSaude() throws SQLException {

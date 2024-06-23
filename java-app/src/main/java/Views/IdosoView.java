@@ -37,7 +37,7 @@ public class IdosoView extends JFrame {
     public IdosoView() {
         setTitle("Gerenciamento de Idosos");
         setSize(800, 400);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
         // Inicialização do controller
         idosoController = new IdosoController();

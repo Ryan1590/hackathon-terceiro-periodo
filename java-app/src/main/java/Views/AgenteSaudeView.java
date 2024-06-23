@@ -29,7 +29,7 @@ public class AgenteSaudeView extends JFrame {
     public AgenteSaudeView() {
         setTitle("Gerenciamento Agentes de Saúde");
         setSize(800, 400);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
         // Inicialização do controller
         controller = new AgenteSaudeController();
