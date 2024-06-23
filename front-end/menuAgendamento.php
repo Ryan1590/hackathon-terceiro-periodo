@@ -34,6 +34,9 @@ session_start();
                 <li class="nav-item">
                     <a class="nav-link text-white fw-bold" href="notificacao">Notificações</a>
                 </li>
+                <li class="nav-item">
+                <a class="nav-link text-white fw-bold" href="lembrete">Lembrete</a>
+            </li>
             </ul>
         </div>
     </div>

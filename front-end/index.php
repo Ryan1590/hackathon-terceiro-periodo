@@ -29,6 +29,9 @@
             <li class="nav-item">
                 <a class="nav-link text-white fw-bold" href="notificacao">Notificação</a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link text-white fw-bold" href="lembrete">Lembrete</a>
+            </li>
         </ul>
         </div>
     </div>
