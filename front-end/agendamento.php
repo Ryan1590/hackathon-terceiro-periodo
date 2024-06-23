@@ -49,7 +49,7 @@
                 <select id="vacinas" name="vacinas" class="form-control" required>
                     <option value="">Selecione a Vacina</option>
                     <?php
-                    $url = 'http://localhost:3000/vacinas';
+                    $url = 'http://localhost:3000/todasvacinas';
                     $vacinas = @file_get_contents($url);
                     if ($vacinas !== false) {
                         $vacinas = json_decode($vacinas);
