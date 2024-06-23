@@ -8,9 +8,9 @@ session_start();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pesquisar Agendamentos</title>
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="./css/menuAgendamento.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
@@ -53,7 +53,7 @@ session_start();
                 <select class="form-select" id="vacina" name="vacina">
                     <option value="">Selecione a Vacina</option>
                     <?php
-                    $url = 'http://localhost:3000/vacinas';
+                    $url = 'http://localhost:3000/todasvacinas';
                     $vacinas = @file_get_contents($url);
                     if ($vacinas !== false) {
                         $vacinas = json_decode($vacinas);
