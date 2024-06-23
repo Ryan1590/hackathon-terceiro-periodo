@@ -55,7 +55,7 @@
                         <label for="cpfInput" class="form-label">CPF:</label>
                         <input type="text" class="form-control" id="cpfInput" name="cpfInput">
                     </div>
-                    <button type="submit" class="btn btn-primary">Enviar</button>
+                    <button type="submit" class="btn btn-primary">Buscar</button>
                     <a href="./" class="btn btn-danger">Cancelar</a>
                 </form>
             </div>
