@@ -6,6 +6,7 @@ git clone https://github.com/seu-usuario/seu-repositorio.git
 npm install
 npm run migrate
 npm run dev
+npm install cors
 
 -------------------------------------------------------------------------------------------
 
