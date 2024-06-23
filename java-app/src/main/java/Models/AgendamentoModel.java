@@ -1,10 +1,6 @@
 package Models;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Timestamp;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,6 +13,7 @@ public class AgendamentoModel {
     private String status;
 
     private Connection connection;
+    private int agenteSaudeId;
 
     public AgendamentoModel(Connection connection) {
         this.connection = connection;
@@ -81,7 +78,18 @@ public class AgendamentoModel {
         this.status = status;
     }
 
-    // Método para obter todos os agendamentos pendentes
+    private void abrirConexao() throws SQLException {
+        if (connection == null || connection.isClosed()) {
+            String url = "jdbc:mysql://localhost:3306/hackathon_vacina";
+            String usuario = "root";
+            String senha = "";
+
+            connection = DriverManager.getConnection(url, usuario, senha);
+            System.out.println("Conexão com o banco de dados estabelecida!");
+        }
+    }
+
+
 // Método para obter todos os agendamentos, incluindo os que não têm agente de saúde associado
     public List<AgendamentoModel> getAgendamentosPendentes() throws SQLException {
         List<AgendamentoModel> agendamentos = new ArrayList<>();
@@ -148,23 +156,63 @@ public class AgendamentoModel {
         }
     }
 
-    // Método para atualizar um agendamento existente
     public boolean updateAgendamento(int id, String agenteSaudeNome, String idosoNome, String vacinaNome, Timestamp dataHora, String status) throws SQLException {
+        abrirConexao(); // Garante que a conexão esteja aberta
+
         int agenteSaudeId = getAgenteSaudeIdPorNome(agenteSaudeNome);
         int idosoId = getIdosoIdPorNome(idosoNome);
         int vacinaId = getVacinaIdPorNome(vacinaNome);
 
-        String sql = "UPDATE agendamento SET agenteSaude_id = ?, idoso_id = ?, vacina_id = ?, data_hora_visita = ?, status = ? WHERE id = ?";
-        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
-            stmt.setInt(1, agenteSaudeId);
-            stmt.setInt(2, idosoId);
-            stmt.setInt(3, vacinaId);
-            stmt.setTimestamp(4, dataHora);
-            stmt.setString(5, status);
-            stmt.setInt(6, id);
-            int rowsAffected = stmt.executeUpdate();
-            return rowsAffected > 0;
+        String sqlUpdate = "UPDATE agendamento SET agenteSaude_id = ?, idoso_id = ?, vacina_id = ?, data_hora_visita = ?, status = ? WHERE id = ?";
+        String sqlInsertAlerta = "INSERT INTO alertas (agendamento_id, mensagem) VALUES (?, ?)";
+
+        // Mensagem para o alerta
+        StringBuilder mensagem = new StringBuilder("Agendamento atualizado: ");
+
+        // Construir a mensagem baseada no que foi atualizado
+        boolean foiAtualizado = false;
+        if (agenteSaudeId != this.agenteSaudeId) {
+            mensagem.append("Agente de saúde alterado para ").append(agenteSaudeNome).append(". ");
+            foiAtualizado = true;
         }
+        if (!dataHora.equals(this.dataHoraVisita)) {
+            mensagem.append("Horário de visita alterado para ").append(dataHora).append(". ");
+            foiAtualizado = true;
+        }
+        if (!status.equals(this.status)) {
+            mensagem.append("Status alterado para ").append(status).append(". ");
+            foiAtualizado = true;
+        }
+
+        try (PreparedStatement stmtUpdate = connection.prepareStatement(sqlUpdate);
+             PreparedStatement stmtInsertAlerta = connection.prepareStatement(sqlInsertAlerta)) {
+
+            stmtUpdate.setInt(1, agenteSaudeId);
+            stmtUpdate.setInt(2, idosoId);
+            stmtUpdate.setInt(3, vacinaId);
+            stmtUpdate.setTimestamp(4, dataHora);
+            stmtUpdate.setString(5, status);
+            stmtUpdate.setInt(6, id);
+
+            int rowsAffected = stmtUpdate.executeUpdate();
+
+            // Se o update foi bem-sucedido, inserir o alerta
+            if (rowsAffected > 0 && foiAtualizado) {
+                stmtInsertAlerta.setInt(1, id);
+                stmtInsertAlerta.setString(2, mensagem.toString());
+                stmtInsertAlerta.executeUpdate();
+            }
+
+            return rowsAffected > 0;
+        } catch (SQLException e) {
+            System.err.println("Erro ao executar updateAgendamento: " + e.getMessage());
+            throw e;
+        } finally {
+            fecharConexao(); // Fecha a conexão com o banco de dados
+        }
+    }
+
+    private void fecharConexao() {
     }
 
     // Método auxiliar para obter o ID do agente de saúde pelo nome

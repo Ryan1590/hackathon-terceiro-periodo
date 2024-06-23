@@ -361,7 +361,8 @@ public class AgendamentoView extends JFrame {
             return;
         }
 
-        boolean result = controller.atualizarAgendamento(id, agenteSaudeNome, idosoNome, vacinaNome, String.valueOf(dataHoraVisita), status);
+        // Chamar o método do controller para atualizar o agendamento
+        boolean result = controller.atualizarAgendamento(id, agenteSaudeNome, idosoNome, vacinaNome, Timestamp.valueOf(String.valueOf(dataHoraVisita)), status);
 
         if (result) {
             JOptionPane.showMessageDialog(this, "Agendamento atualizado com sucesso!",
@@ -373,6 +374,7 @@ public class AgendamentoView extends JFrame {
                     "Erro", JOptionPane.ERROR_MESSAGE);
         }
     }
+
 
 
     // Método para pesquisar um agendamento pelo ID

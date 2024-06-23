@@ -7,6 +7,7 @@ export const getAllAlertas = async (req: Request, res: Response) => {
             .leftJoin('agendamento as a', 'al.agendamento_id', 'a.id')
             .leftJoin('idoso as i', 'a.idoso_id', 'i.id')
             .leftJoin('vacina as v', 'a.vacina_id', 'v.id')
+            .where('al.tipo', '=', 'web')
             .select('i.nome as nomeIdoso', 'v.nome as nomeVacina', 'al.mensagem');
 
         return res.status(200).json(alertas);

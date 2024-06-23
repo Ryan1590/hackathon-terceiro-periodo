@@ -33,12 +33,12 @@ public class AgendamentoController {
         }
     }
 
-    public boolean atualizarAgendamento(int id, String agenteSaude, String idoso, String vacina, String dataHoraVisita, String status) {
+    public boolean atualizarAgendamento(int id, String agenteSaude, String idoso, String vacina, Timestamp dataHoraVisita, String status) {
         try {
-            Timestamp timestampDataHora = Timestamp.valueOf(dataHoraVisita);
-            return agendamentoModel.updateAgendamento(id, agenteSaude, idoso, vacina, timestampDataHora, status);
+            return agendamentoModel.updateAgendamento(id, agenteSaude, idoso, vacina, dataHoraVisita, status);
         } catch (SQLException e) {
             System.err.println("Erro ao atualizar agendamento: " + e.getMessage());
+            e.printStackTrace(); // Para depuração, imprima o stack trace completo
             return false;
         }
     }

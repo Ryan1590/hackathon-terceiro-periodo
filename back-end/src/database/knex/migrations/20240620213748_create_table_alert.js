@@ -7,6 +7,7 @@ exports.up = function(knex) {
         table.increments('id').primary();
         table.integer('agendamento_id').unsigned();
         table.string('mensagem').notNullable();
+        table.string('tipo').notNullable();
 
         table.foreign('agendamento_id').references('id').inTable('agendamento').onDelete('CASCADE').onUpdate('CASCADE');
     });
