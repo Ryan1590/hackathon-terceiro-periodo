@@ -164,7 +164,7 @@ public class AgendamentoModel {
         int vacinaId = getVacinaIdPorNome(vacinaNome);
 
         String sqlUpdate = "UPDATE agendamento SET agenteSaude_id = ?, idoso_id = ?, vacina_id = ?, data_hora_visita = ?, status = ? WHERE id = ?";
-        String sqlInsertAlerta = "INSERT INTO alertas (agendamento_id, mensagem) VALUES (?, ?)";
+        String sqlInsertAlerta = "INSERT INTO alertas (agendamento_id, mensagem, tipo) VALUES (?, ?, 'web')";
 
         // Mensagem para o alerta
         StringBuilder mensagem = new StringBuilder("Agendamento atualizado: ");
