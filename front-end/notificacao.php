@@ -36,7 +36,7 @@
     </div>
 </nav>
 
-<h2 class="text-center mt-4">Lembrete</h2>
+<h2 class="text-center mt-4">Notificação</h2>
 
 <main>
     <div class="alertas-container">
