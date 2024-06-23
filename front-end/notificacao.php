@@ -56,6 +56,7 @@
                         <input type="text" class="form-control" id="cpfInput" name="cpfInput">
                     </div>
                     <button type="submit" class="btn btn-primary">Enviar</button>
+                    <a href="./" class="btn btn-danger">Cancelar</a>
                 </form>
             </div>
         </div>
