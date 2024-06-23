@@ -65,22 +65,29 @@
 
 
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        var cpfModal = new bootstrap.Modal(document.getElementById('cpfModal'), {
-            backdrop: 'static',
-            keyboard: false
-        });
-        cpfModal.show();
+document.addEventListener('DOMContentLoaded', function() {
+    var cpfModal = new bootstrap.Modal(document.getElementById('cpfModal'), {
+        backdrop: 'static',
+        keyboard: false
+    });
+    cpfModal.show();
 
-        document.getElementById('cpfForm').addEventListener('submit', function(event) {
-            event.preventDefault();
-            var cpf = document.getElementById('cpfInput').value;
-            
-            fetch('http://localhost:3000/vacinas?cpf=' + cpf)
-                .then(response => response.json())
-                .then(data => {
-                    var alertasLista = document.getElementById('alertas-lista');
-                    alertasLista.innerHTML = '';
+    document.getElementById('cpfForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+        var cpf = document.getElementById('cpfInput').value;
+        
+        fetch('http://localhost:3000/vacinas?cpf=' + cpf)
+            .then(response => {
+                if (!response.ok) {
+                    return response.json().then(error => { throw new Error(error.message); });
+                }
+                return response.json();
+            })
+            .then(data => {
+                var alertasLista = document.getElementById('alertas-lista');
+                alertasLista.innerHTML = '';
+
+                if (Array.isArray(data)) {
                     data.forEach(vacina => {
                         var alertaItem = document.createElement('div');
                         alertaItem.className = 'alerta-item';
@@ -90,18 +97,25 @@
                         alertaItem.innerHTML = `<i class="fas fa-syringe"></i> Vacina ${vacina.nome}, Data: ${dataFormatada}, Horário: ${horaFormatada}`;
                         alertasLista.appendChild(alertaItem);
                     });
-                    cpfModal.hide();
-                })
-                .catch(error => {
-                    console.error('Erro:', error);
-                    alert('Nenhuma vacina com status pendente encontrada para esse cpf');
-                });
-        });
-
+                } else if (data.message) {
+                    console.error('Mensagem do backend:', data.message);
+                    alert(data.message);
+                    window.location.href='./';
+                } else {
+                    alert('Ocorreu um erro ao processar os dados.');
+                }
+                
+                cpfModal.hide();
+            })
+            .catch(error => {
+                console.error('Erro:', error);
+                alert(error.message);
+            });
     });
+});
+
+
 </script>
-
-
 
 <footer class="footer">
     <div class="container">

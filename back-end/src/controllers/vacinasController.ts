@@ -18,18 +18,14 @@ export const getAllVacinas = async (req: Request, res: Response) => {
             return res.status(404).json({ message: 'Idoso não encontrado' });
         }
 
-        const vacinaAceita = await db('agendamento')
-            .where({ idoso_id: idoso.id, status: 'Pendente' })
-            .first();
-
-        if (!vacinaAceita) {
-            return res.status(403).json({ message: 'Acesso negado. Nenhuma vacina com status pendente encontrada.' });
-        }
-
         const vacinas = await db('agendamento')
             .join('vacina', 'agendamento.vacina_id', 'vacina.id')
             .select('vacina.nome', 'vacina.descricao', 'agendamento.data_hora_visita')
             .where('agendamento.idoso_id', idoso.id);
+
+        if (vacinas.length === 0) {
+            return res.status(200).json({ message: 'O idoso não tem vacinas agendadas' });
+        }
 
         return res.status(200).json(vacinas);
     } catch (error) {
