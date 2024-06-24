@@ -18,10 +18,8 @@ npm run dev
 4. [Funcionalidades Principais](#funcionalidades-principais)
 5. [Requisitos do Sistema](#requisitos-do-sistema)
 6. [Guia de Instalação](#guia-de-instalacao)
-7. [Guia de Uso](#guia-de-uso)
-8. [Segurança](#seguranca)
-9. [Manutenção e Suporte](#manutencao-e-suporte)
-10. [Conclusão](#conclusao)
+7. [Testes](#testes)
+
 
 ---
 
@@ -90,16 +88,6 @@ O sistema é composto por duas partes principais:
 - Conexão com o banco de dados MySQL usando JDBC.
 - Validação de dados para garantir integridade.
 
-### Requisitos Não Funcionais
-
-#### Segurança
-- Armazenamento seguro dos dados dos usuários e idosos.
-
-#### Usabilidade
-- Interface acessível para diferentes níveis de familiaridade com tecnologia.
-- Responsividade e velocidade do sistema.
-
----
 
 # 6. Guia de Instalação 
 
@@ -123,3 +111,59 @@ O sistema é composto por duas partes principais:
    ```bash
    npm run dev
    ```
+6. Configure as informações do banco de dados no knexfile.js
+```bash
+module.exports = {
+  development: {
+    client: 'mysql',
+    connection: {
+      host: '127.0.0.1',
+      user: 'seu_usuario',
+      password: 'sua_senha',
+      database: 'hackathon_vacina'
+    }
+  },
+  test: {
+    client: 'mysql',
+    connection: {
+      host: '127.0.0.1',
+      user: 'seu_usuario',
+      password: 'sua_senha',
+      database: 'hackathon_vacina_test'
+    }
+  }
+};
+
+ ```
+ 7. Configure as informações do banco de dados no DataBase.java
+
+```bash
+
+public class DataBase {
+
+    public static final String URL = "jdbc:mysql://localhost/hackathon_vacina";
+    public static final String USER = "root";
+    public static final String PASSWORD = "sua_senha";
+
+    public static Connection connection() throws SQLException {
+        return DriverManager.getConnection(URL, USER, PASSWORD);
+    }
+}
+
+ ```
+
+# 7. Testes 
+
+# Criar o Banco de Dados de Teste
+-Acesse seu sistema de gerenciamento de banco de dados (como MySQL Workbench, phpMyAdmin, etc.).
+-Crie um novo banco de dados chamado hackathon_vacina_test.
+
+# Executar as Migrações no Banco de Dados de Teste
+-Abra o terminal na raiz do seu projeto.
+-Execute o comando abaixo para aplicar as migrações no banco de dados de teste:  knex migrate:latest --env test
+
+
+# Executar os Testes:
+Execute esse comando  executar os testes:  npm test
+
+
