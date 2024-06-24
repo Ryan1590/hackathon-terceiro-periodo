@@ -37,7 +37,7 @@
         </div>
     </div>
 </nav>
-  
+
     <br><br>
 <div class="container">
     <div class="register-container p-4 bg-white rounded shadow">
@@ -65,7 +65,6 @@
                     ?>
                 </select>
             </div>
-
             <div class="form-group input-group">
                 <label for="dataHora" class="visually-hidden">Data e Hora</label>
                 <input type="datetime-local" id="dataHora" name="dataHora" class="form-control" required>
@@ -77,6 +76,31 @@
         </div>
     </div>
 </div>
+
+<script>
+   document.addEventListener('DOMContentLoaded', function() {
+        const cpfInput = document.getElementById('cpf');
+        const registerForm = document.getElementById('register-form');
+
+        cpfInput.addEventListener('input', function() {
+            let cpf = cpfInput.value.replace(/\D/g, ''); 
+            if (cpf.length > 11) {
+                cpf = cpf.slice(0, 11); 
+            }
+            cpf = cpf.replace(/(\d{3})(\d)/, '$1.$2'); 
+            cpf = cpf.replace(/(\d{3})(\d)/, '$1.$2'); 
+            cpf = cpf.replace(/(\d{3})(\d{1,2})$/, '$1-$2'); 
+            cpfInput.value = cpf;
+        });
+
+        registerForm.addEventListener('submit', function(event) {
+            const rawCpf = cpfInput.value.replace(/\D/g, ''); 
+            console.log('CPF:', rawCpf); 
+            cpfInput.value = rawCpf; 
+        });
+    });;
+
+</script>
 
 
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>

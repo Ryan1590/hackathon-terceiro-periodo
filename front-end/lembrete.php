@@ -77,16 +77,20 @@
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-    var cpfModal = new bootstrap.Modal(document.getElementById('cpfModal'), {
+    const cpfModal = new bootstrap.Modal(document.getElementById('cpfModal'), {
         backdrop: 'static',
         keyboard: false
     });
     cpfModal.show();
 
-    document.getElementById('cpfForm').addEventListener('submit', function(event) {
+    const cpfForm = document.getElementById('cpfForm');
+    const cpfInput = document.getElementById('cpfInput');
+
+    cpfForm.addEventListener('submit', function(event) {
         event.preventDefault();
-        var cpf = document.getElementById('cpfInput').value;
-        
+        let cpf = cpfInput.value.replace(/\D/g, '');
+        console.log('CPF:', cpf);
+
         fetch('http://localhost:3000/vacinas?cpf=' + cpf)
             .then(response => {
                 if (!response.ok) {
@@ -95,20 +99,20 @@ document.addEventListener('DOMContentLoaded', function() {
                 return response.json();
             })
             .then(data => {
-                var alertasLista = document.getElementById('alertas-lista');
+                const alertasLista = document.getElementById('alertas-lista');
                 alertasLista.innerHTML = '';
 
                 if (Array.isArray(data)) {
                     data.forEach(vacina => {
-                        var alertaItem = document.createElement('div');
+                        const alertaItem = document.createElement('div');
                         alertaItem.className = 'alerta-item';
                         
-                        var dataHoraVisita = new Date(vacina.data_hora_visita);
-                        var dataFormatada = dataHoraVisita.toLocaleDateString();
-                        var horaFormatada = dataHoraVisita.toLocaleTimeString();
+                        const dataHoraVisita = new Date(vacina.data_hora_visita);
+                        const dataFormatada = dataHoraVisita.toLocaleDateString();
+                        const horaFormatada = dataHoraVisita.toLocaleTimeString();
                         
                         // Verifica se falta exatamente 1 dia para a visita
-                        var umDiaAntes = new Date();
+                        const umDiaAntes = new Date();
                         umDiaAntes.setDate(umDiaAntes.getDate() + 1);
                         
                         if (dataHoraVisita <= umDiaAntes) {
@@ -131,12 +135,23 @@ document.addEventListener('DOMContentLoaded', function() {
             .catch(error => {
                 console.error('Erro:', error);
                 alert(error.message);
+                cpfInput.value = ''; 
             });
     });
+
+    cpfInput.addEventListener('input', function() {
+        let cpf = cpfInput.value.replace(/\D/g, ''); 
+        if (cpf.length > 11) {
+            cpf = cpf.slice(0, 11); 
+        }
+        cpf = cpf.replace(/(\d{3})(\d)/, '$1.$2'); 
+        cpf = cpf.replace(/(\d{3})(\d)/, '$1.$2'); 
+        cpf = cpf.replace(/(\d{3})(\d{1,2})$/, '$1-$2'); 
+        cpfInput.value = cpf;
+    });
 });
-
-
 </script>
+
 
 <footer class="footer">
     <div class="container">

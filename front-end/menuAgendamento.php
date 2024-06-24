@@ -46,7 +46,7 @@ session_start();
     <h2 class="text-center mt-4">Pesquisar Agendamentos</h2>
     <div class="card shadow p-4 mb-4 mt-4">
     <div class="mt-4"></div>
-    <form class="mt-4" method="GET" action="menuAgendamento">
+    <form class="mt-4" id="register-form" method="GET" action="menuAgendamento">
             <div class="form-group mb-3">
                 <label for="cpf">CPF:</label>
                 <input type="text" class="form-control" id="cpf" name="cpf" placeholder="Digite o CPF" required>
@@ -190,7 +190,6 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['cpf'])) {
         });
     }
 
-
     function confirmarCancelamento(id) {
         Swal.fire({
             title: 'Tem certeza que deseja cancelar o agendamento?',
@@ -207,6 +206,29 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['cpf'])) {
             }
         });
     }
+
+   document.addEventListener('DOMContentLoaded', function() {
+        const cpfInput = document.getElementById('cpf');
+        const registerForm = document.getElementById('register-form');
+
+        cpfInput.addEventListener('input', function() {
+            let cpf = cpfInput.value.replace(/\D/g, ''); 
+            if (cpf.length > 11) {
+                cpf = cpf.slice(0, 11); 
+            }
+            cpf = cpf.replace(/(\d{3})(\d)/, '$1.$2'); 
+            cpf = cpf.replace(/(\d{3})(\d)/, '$1.$2'); 
+            cpf = cpf.replace(/(\d{3})(\d{1,2})$/, '$1-$2'); 
+            cpfInput.value = cpf;
+        });
+
+        registerForm.addEventListener('submit', function(event) {
+            const rawCpf = cpfInput.value.replace(/\D/g, ''); 
+            console.log('CPF:', rawCpf); 
+            cpfInput.value = rawCpf; 
+        });
+
+    });;
 
 </script>
 
