@@ -16,6 +16,7 @@ import java.util.Date;
 import java.util.List;
 
 public class IdosoView extends JFrame {
+    private HistoricoView historicoView;
     private JTextField textFieldNome;
     private JTextField textFieldBairro;
     private JTextField textFieldEstado;
@@ -155,6 +156,8 @@ public class IdosoView extends JFrame {
         buttonAtualizar = new JButton("Atualizar");
         buttonExcluir = new JButton("Excluir");
         buttonPesquisar = new JButton("Pesquisar");
+        JButton buttonVerHistorico = new JButton("Ver Histórico");
+        panelBotoes.add(buttonVerHistorico);
         panelBotoes.add(buttonSalvar);
         panelBotoes.add(buttonAtualizar);
         panelBotoes.add(buttonExcluir);
@@ -186,6 +189,18 @@ public class IdosoView extends JFrame {
         buttonAtualizar.addActionListener(e -> atualizarIdoso());
         buttonExcluir.addActionListener(e -> excluirIdoso());
         buttonPesquisar.addActionListener(e -> pesquisarIdoso());
+
+        buttonVerHistorico.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (historicoView == null) {
+                    historicoView = new HistoricoView();
+                }
+                historicoView.setVisible(true);
+            }
+        });
+
+
 
         // Configurar seleção na tabela
         table.getSelectionModel().addListSelectionListener(e -> selecionarIdoso());
