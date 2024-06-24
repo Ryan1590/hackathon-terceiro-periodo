@@ -152,6 +152,21 @@ public class AgenteSaudeModel {
         return false;
     }
 
+    public static boolean hasAgendamentos(int agenteSaudeId) throws SQLException {
+        try (Connection connection = DataBase.connection();
+             PreparedStatement statement = connection.prepareStatement("SELECT COUNT(*) AS count FROM agendamento WHERE agenteSaude_id = ?")) {
+
+            statement.setInt(1, agenteSaudeId);
+
+            try (ResultSet resultSet = statement.executeQuery()) {
+                if (resultSet.next()) {
+                    int count = resultSet.getInt("count");
+                    return count > 0;
+                }
+            }
+        }
+        return false;
+    }
 
     // Método para atualizar um agente de saúde no banco de dados
     public boolean updateAgenteSaude(int id, String nome, String cpf, Date dataNascimento) throws SQLException {

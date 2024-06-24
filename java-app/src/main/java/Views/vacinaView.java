@@ -91,6 +91,7 @@ public class vacinaView extends JFrame {
         JLabel labelOutro = new JLabel("ID:");
         panelTextFieldOutro.add(labelOutro);
         panelTextFieldOutro.add(textFieldOutro);
+        textFieldOutro.setEditable(false);
         panelRight.add(panelTextFieldOutro, BorderLayout.SOUTH);
 
         // Adicionando os painéis esquerdo e direito ao painel principal
@@ -141,6 +142,12 @@ public class vacinaView extends JFrame {
         String nome = textFieldNome.getText();
         String descricao = textAreaDescricao.getText();
 
+        if(descricao.isEmpty() || nome.isEmpty()){
+            JOptionPane.showMessageDialog(this, "Preencha todos os campos!",
+                    "Erro", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
         try {
             int saved = controller.saveVacina(nome, descricao);
             if (saved == 1) {
@@ -175,13 +182,14 @@ public class vacinaView extends JFrame {
 
         try {
             int id = Integer.parseInt(idTexto);
-            if (controller.deleteVacina(id)) {
+            int sucesso = controller.deleteVacina(id);
+            if (sucesso == 1) {
                 JOptionPane.showMessageDialog(this, "Vacina excluída com sucesso!",
                         "Sucesso", JOptionPane.INFORMATION_MESSAGE);
                 loadVacinas();
                 limparCampos();
-            } else {
-                JOptionPane.showMessageDialog(this, "Erro ao excluir vacina. Verifique o ID e tente novamente.",
+            } else if(sucesso == 2) {
+                JOptionPane.showMessageDialog(this, "Vacina possui vínculo, não é possível excluir!",
                         "Erro", JOptionPane.ERROR_MESSAGE);
             }
         } catch (NumberFormatException | SQLException e) {
@@ -203,6 +211,12 @@ public class vacinaView extends JFrame {
         String nome = textFieldNome.getText();
         String descricao = textAreaDescricao.getText();
 
+        if(nome.isEmpty() || descricao.isEmpty()){
+            JOptionPane.showMessageDialog(this, "Preencha todos os campos!",
+                    "Erro", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
         try {
             int saved = controller.updateVacina(nome, descricao, id);
             if (saved == 1) {
@@ -213,6 +227,11 @@ public class vacinaView extends JFrame {
             } else if(saved == 0){
                 JOptionPane.showMessageDialog(this, "Ja existe uma vacina com esse nome.",
                         "Erro", JOptionPane.ERROR_MESSAGE);
+            }else if(saved == -1){
+                JOptionPane.showMessageDialog(this, "Esse nome de vacina ja existe!",
+                        "Erro", JOptionPane.ERROR_MESSAGE);
+                loadVacinas();
+                limparCampos();
             }
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(this, "Erro ao atualizar vacina: " + e.getMessage(),

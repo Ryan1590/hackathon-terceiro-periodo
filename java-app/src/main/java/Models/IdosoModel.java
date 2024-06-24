@@ -147,10 +147,6 @@ public class IdosoModel {
     }
 
     public boolean updateUser(String name, Date dataNascimento, String cpf, String logradouro, String numero, String bairro, String cep, String cidade, String estado, int id) throws SQLException {
-        if (verificarUser(name) && !getUser(id).getName().equals(name)) {
-            return false;
-        }
-
         try (Connection connection = DataBase.connection();
              PreparedStatement statement = connection.prepareStatement(
                      "UPDATE idoso SET Nome = ?, Data_nascimento = ?, CPF = ?, Logradouro = ?, Numero_logradouro = ?, Bairro = ?, CEP = ?, Cidade = ?, Estado = ? WHERE id = ?")) {
@@ -170,6 +166,7 @@ public class IdosoModel {
             return result > 0;
         }
     }
+
 
     public boolean delete(int id) throws SQLException {
         try (Connection connection = DataBase.connection();
@@ -213,6 +210,7 @@ public class IdosoModel {
 
         return user;
     }
+
 
     public static boolean verificarUser(String name) throws SQLException {
         try (Connection connection = DataBase.connection();

@@ -32,16 +32,30 @@ public class vacinaController {
     }
 
     public int updateVacina(String nome, String descricao, int id) throws SQLException {
-        if (!vacinaModel.verificarVacina(nome)) {
-            boolean saved = vacinaModel.updateVacina(nome, descricao, id);
-            if(saved){
-                return 1;
-            }
+        // Recupera a vacina atual do banco de dados
+        vacinaModel currentVacina = vacinaModel.getVacina(id);
+        if (currentVacina == null) {
+            return -3;
         }
-        return 0;
+        if (!currentVacina.getNome().equals(nome) && vacinaModel.verificarVacina(nome)) {
+            return -1;
+        }
+
+        // Tenta atualizar a vacina
+        boolean sucesso = vacinaModel.updateVacina(nome, descricao, id);
+        if (sucesso) {
+            return 1;
+        } else {
+            return 0;
+        }
     }
 
-    public boolean deleteVacina(int id) throws SQLException {
-        return vacinaModel.deleteVacina(id);
+
+    public int deleteVacina(int id) throws SQLException {
+        if(!vacinaModel.hasAgendamentos(id)){
+            vacinaModel.deleteVacina(id);
+            return 1;
+        }
+        return 2;
     }
 }

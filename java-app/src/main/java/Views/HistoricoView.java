@@ -50,9 +50,17 @@ public class HistoricoView extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String cpf = searchField.getText();
+                if (cpf.isEmpty()) {
+                    JOptionPane.showMessageDialog(HistoricoView.this,
+                            "CPF não pode estar vazio.",
+                            "Erro",
+                            JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
                 controller.buscarHistoricoPorCPF(cpf, tableModel);
             }
         });
+
     }
 
     public static void main(String[] args) {
