@@ -16,6 +16,7 @@ import java.util.Date;
 import java.util.List;
 
 public class IdosoView extends JFrame {
+    private PrescricoesView prescricoesView;
     private HistoricoView historicoView;
     private JTextField textFieldNome;
     private JTextField textFieldBairro;
@@ -31,6 +32,7 @@ public class IdosoView extends JFrame {
     private JButton buttonAtualizar;
     private JButton buttonExcluir;
     private JButton buttonPesquisar;
+    private JButton buttonPrescricao;
     private JTable table;
 
     private IdosoController idosoController;
@@ -147,7 +149,6 @@ public class IdosoView extends JFrame {
         textFieldId = new JTextField(5);
         panelLeft.add(textFieldId, gbc);
 
-        // Painel direito para botões e tabela com BorderLayout
         JPanel panelRight = new JPanel(new BorderLayout());
 
         // Subpainel para os botões
@@ -156,12 +157,24 @@ public class IdosoView extends JFrame {
         buttonAtualizar = new JButton("Atualizar");
         buttonExcluir = new JButton("Excluir");
         buttonPesquisar = new JButton("Pesquisar");
-        JButton buttonVerHistorico = new JButton("Ver Histórico");
+        JButton buttonVerHistorico = new JButton("Histórico");
+        buttonPrescricao = new JButton("Prescrições");
+
+        // Ajustando o tamanho preferencial dos botões
+        Dimension buttonSize = new Dimension(110, 30);
+        buttonSalvar.setPreferredSize(buttonSize);
+        buttonAtualizar.setPreferredSize(buttonSize);
+        buttonExcluir.setPreferredSize(buttonSize);
+        buttonPesquisar.setPreferredSize(buttonSize);
+        buttonVerHistorico.setPreferredSize(buttonSize);
+        buttonPrescricao.setPreferredSize(buttonSize);
+
         panelBotoes.add(buttonVerHistorico);
         panelBotoes.add(buttonSalvar);
         panelBotoes.add(buttonAtualizar);
         panelBotoes.add(buttonExcluir);
         panelBotoes.add(buttonPesquisar);
+        panelBotoes.add(buttonPrescricao);
 
         // Adicionando o painel de botões ao painel direito
         panelRight.add(panelBotoes, BorderLayout.NORTH);
@@ -200,7 +213,15 @@ public class IdosoView extends JFrame {
             }
         });
 
-
+        buttonPrescricao.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (prescricoesView == null) {
+                    prescricoesView = new PrescricoesView();
+                }
+                prescricoesView.setVisible(true);
+            }
+        });
 
         // Configurar seleção na tabela
         table.getSelectionModel().addListSelectionListener(e -> selecionarIdoso());
