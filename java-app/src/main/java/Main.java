@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import Models.DataBase;
 
+public class Main {
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
             Connection connection = null;
@@ -28,3 +29,4 @@ import Models.DataBase;
             }
         });
     }
+}
