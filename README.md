@@ -109,7 +109,7 @@ O sistema é composto por duas partes principais:
    ```
 2. Navegue até o diretório do projeto:
    ```bash
-   cd seu-repositorio
+   cd back-end
    ```
 3. Instale as dependências:
    ```bash
@@ -122,8 +122,4 @@ O sistema é composto por duas partes principais:
 5. Inicie o servidor de desenvolvimento:
    ```bash
    npm run dev
-   ```
-6. Instale o CORS:
-   ```bash
-   npm install cors
    ```
