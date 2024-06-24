@@ -25,7 +25,8 @@ export const getAllVacinas = async (req: Request, res: Response) => {
             .select('vacina.nome', 'vacina.descricao', 'agendamento.data_hora_visita')
             .where('agendamento.idoso_id', idoso.id)
             .where('agendamento.data_hora_visita', '>', currentTime)
-            .orderBy('agendamento.data_hora_visita', 'desc');
+            .whereNot('agendamento.status', 'Cancelado')
+            .orderBy('agendamento.data_hora_visita', 'asc');
 
         if (vacinas.length === 0) {
             return res.status(200).json({ message: 'O idoso não tem vacinas agendadas' });
@@ -37,6 +38,7 @@ export const getAllVacinas = async (req: Request, res: Response) => {
         return res.status(500).json({ message: 'Erro ao buscar vacinas' });
     }
 };
+
 
 
 export const getAllVacinasTodas = async (req: Request, res: Response) => {
