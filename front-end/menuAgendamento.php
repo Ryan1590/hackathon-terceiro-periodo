@@ -144,7 +144,8 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['cpf'])) {
                     echo '<td>' . htmlspecialchars($agendamento['status'], ENT_QUOTES, 'UTF-8') . '</td>';
                     echo '<td>';
                     echo '<a href="editarAgendamento?id=' . $agendamento['id'] . '" class="btn btn-warning btn-sm">Editar</a> ';
-                    echo '<a href="#" onclick="confirmarExclusao(' . $agendamento['id'] . ')" class="btn btn-danger btn-sm">Excluir</a>';
+                    echo '<a href="#" onclick="confirmarExclusao(' . $agendamento['id'] . ')" class="btn btn-danger btn-sm mr-2">Excluir</a>';
+                    echo '<a href="#" onclick="confirmarCancelamento(' . $agendamento['id'] . ')" class="btn btn-dark btn-sm">Cancelar</a>';
                     echo '</td>';
                     echo '</tr>';
                 }
@@ -188,6 +189,25 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['cpf'])) {
             }
         });
     }
+
+
+    function confirmarCancelamento(id) {
+        Swal.fire({
+            title: 'Tem certeza que deseja cancelar o agendamento?',
+            text: "Você não poderá reverter isso!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Sim',
+            cancelButtonText: 'Cancelar'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = 'cancelarAgendamento?id=' + id;
+            }
+        });
+    }
+
 </script>
 
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>

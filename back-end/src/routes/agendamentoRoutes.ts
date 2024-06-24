@@ -5,7 +5,8 @@ import { createAgendamento,
          getAgendamentosByCpf,
          getAgendamentosByCpfAndVacina,
          updateAgendamento,
-         getAgendamentoById
+         getAgendamentoById,
+         cancelAgendamento
        }
 from '../controllers/agendamentoController';
 
@@ -15,5 +16,6 @@ router.get('/cpf/:cpf', getAgendamentosByCpf);
 router.get('/cpf/:cpf/vacina/:nomeVacina', getAgendamentosByCpfAndVacina);
 router.put('/:id', updateAgendamento);
 router.get('/id/:id', getAgendamentoById);
+router.put('/cancelar/:id', cancelAgendamento);
 
 export default router;

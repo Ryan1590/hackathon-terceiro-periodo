@@ -38,6 +38,17 @@ export const deleteAgendamento = async (req: Request, res: Response) => {
     try {
         const { id } = req.params;
 
+        const vinculo = await db('agendamento as a')
+            .join('agente_saude as ag', 'a.agenteSaude_id', 'ag.id')
+            .where('a.id', id)
+            .select('ag.id')
+            .first();
+
+        if (vinculo) {
+            
+            return res.status(400).json({ message: 'Não é possível excluir um agendamento que já foi aceito pelo agente.' });
+        }
+
         const rowsDeleted = await db('agendamento').where({ id }).del();
 
         if (rowsDeleted) {
@@ -50,6 +61,36 @@ export const deleteAgendamento = async (req: Request, res: Response) => {
         return res.status(500).json({ message: 'Erro ao excluir agendamento' });
     }
 };
+
+
+export const cancelAgendamento = async (req: Request, res: Response) => {
+    try {
+        const { id } = req.params;
+
+        const agendamento = await db('agendamento').where({ id }).first();
+        if (!agendamento) {
+            return res.status(404).json({ message: 'Agendamento não encontrado' });
+        }
+
+        const rowsUpdated = await db('agendamento').where({ id }).update({ status: 'Cancelado' });
+
+        if (rowsUpdated) {
+            await db('alertas').insert({
+                agendamento_id: id,
+                mensagem: 'Agendamento Cancelado',
+                tipo: 'Java'
+            });
+
+            return res.status(200).json({ message: 'Agendamento cancelado com sucesso' });
+        } else {
+            return res.status(500).json({ message: 'Erro ao cancelar agendamento' });
+        }
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({ message: 'Erro ao cancelar agendamento' });
+    }
+};
+
 
 export const getAgendamentosByCpf = async (req: Request, res: Response) => {
     try {
