@@ -1,11 +1,13 @@
 const path = require('path');
 
+const BASE_PATH = path.join(__dirname, 'src', 'database', 'knex');
+
 module.exports = {
   development: {
     client: 'mysql',
     connection: {
       host: 'localhost',
-      port: 3306, // Alterado para número
+      port: 3306,
       user: 'root',
       password: '',
       database: 'hackathon_vacina'
@@ -15,26 +17,25 @@ module.exports = {
       max: 10
     },
     migrations: {
-      directory: path.resolve(__dirname, 'src', 'database', 'knex', 'migrations')
+      directory: path.join(BASE_PATH, 'migrations')
     },
     useNullAsDefault: true
-  },
+  },    
   test: {
     client: 'mysql',
     connection: {
       host: 'localhost',
-      port: 3306, // Alterado para número
+      port: 3306,
       user: 'root',
       password: '',
-      database: 'hackathon_vacina_test'  // Use um banco de dados separado para testes
+      database: 'hackathon_vacina_test'
     },
     pool: {
       min: 2,
       max: 10
     },
     migrations: {
-      
-      directory: path.resolve(__dirname, 'src', 'database', 'knex', 'migrations')
+      directory: path.join(BASE_PATH, 'migrations')
     },
     useNullAsDefault: true
   }
