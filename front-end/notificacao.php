@@ -68,17 +68,20 @@
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-    var cpfModal = new bootstrap.Modal(document.getElementById('cpfModal'), {
+    const cpfModal = new bootstrap.Modal(document.getElementById('cpfModal'), {
         backdrop: 'static',
         keyboard: false
     });
     cpfModal.show();
 
-    document.getElementById('cpfForm').addEventListener('submit', function(event) {
+    const cpfForm = document.getElementById('cpfForm');
+    const cpfInput = document.getElementById('cpfInput');
+
+    cpfForm.addEventListener('submit', function(event) {
         event.preventDefault();
-        var cpf = document.getElementById('cpfInput').value;
+        const rawCpf = cpfInput.value.replace(/\D/g, ''); 
         
-        fetch('http://localhost:3000/alertas?cpf=' + cpf)
+        fetch('http://localhost:3000/alertas?cpf=' + rawCpf)
             .then(response => {
                 if (!response.ok) {
                     return response.json().then(error => { throw new Error(error.message); });
@@ -86,12 +89,12 @@ document.addEventListener('DOMContentLoaded', function() {
                 return response.json();
             })
             .then(data => {
-                var alertasLista = document.getElementById('alertas-lista');
+                const alertasLista = document.getElementById('alertas-lista');
                 alertasLista.innerHTML = '';
 
-                if (Array.isArray(data)) {
+                if (Array.isArray(data) && data.length > 0) {
                     data.forEach(alerta => {
-                        var alertaItem = document.createElement('div');
+                        const alertaItem = document.createElement('div');
                         alertaItem.className = 'alerta-item';
                         alertaItem.innerHTML = `
                             <div><i class="fas fa-bell"></i> Idoso: ${alerta.nomeIdoso}<br>
@@ -100,20 +103,29 @@ document.addEventListener('DOMContentLoaded', function() {
                         `;
                         alertasLista.appendChild(alertaItem);
                     });
-                } else if (data.message) {
-                    console.error('Mensagem do backend:', data.message);
-                    alert(data.message);
-                    window.location.href = './';
                 } else {
-                    alert('Ocorreu um erro ao processar os dados.');
+                    alertasLista.innerHTML = '<div class="alert alert-info">Nenhum idoso encontrado.</div>';
                 }
+                cpfModal.hide(); 
                 
-                cpfModal.hide();
             })
             .catch(error => {
                 console.error('Erro:', error);
                 alert(error.message);
+                cpfInput.value = ''; 
             });
+    });
+
+    cpfInput.addEventListener('input', function() {
+        let cpf = cpfInput.value.replace(/\D/g, ''); 
+        if (cpf.length > 11) {
+            cpf = cpf.slice(0, 11); 
+        }
+        cpf = cpf.replace(/(\d{3})(\d)/, '$1.$2'); 
+        cpf = cpf.replace(/(\d{3})(\d)/, '$1.$2'); 
+        cpf = cpf.replace(/(\d{3})(\d{1,2})$/, '$1-$2'); 
+        cpfInput.value = cpf;
+        console.log('Masked CPF:', cpfInput.value); 
     });
 });
 
