@@ -18,7 +18,6 @@ import Models.DataBase;
                         "Erro de Conexão", JOptionPane.ERROR_MESSAGE);
                 e.printStackTrace();
             } finally {
-                // Certifique-se de fechar a conexão quando não precisar mais dela
                 if (connection != null) {
                     try {
                         connection.close();

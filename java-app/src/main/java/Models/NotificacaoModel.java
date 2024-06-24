@@ -47,7 +47,7 @@ public class NotificacaoModel {
                 "JOIN agendamento a ON al.agendamento_id = a.id " +
                 "JOIN idoso i ON a.idoso_id = i.id " +
                 "JOIN vacina v ON a.vacina_id = v.id " +
-                "JOIN agente_saude ag ON a.agenteSaude_id = ag.id";
+                "JOIN agente_saude ag ON a.agenteSaude_id = ag.id WHERE al.tipo = 'Java'";
 
         try (Connection connection = DataBase.connection();
              Statement statement = connection.createStatement();
