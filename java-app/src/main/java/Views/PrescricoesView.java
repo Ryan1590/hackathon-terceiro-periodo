@@ -75,13 +75,13 @@ public class PrescricoesView extends JFrame {
         // Add columns to the table model
         tableModel.addColumn("ID");
         tableModel.addColumn("CPF");
-        tableModel.addColumn("Nome"); // Nova coluna para o nome do idoso
+        tableModel.addColumn("Nome");
         tableModel.addColumn("Alergias");
         tableModel.addColumn("Condições Médicas");
         tableModel.addColumn("Observações");
 
         JScrollPane scrollPane = new JScrollPane(table);
-        scrollPane.setPreferredSize(new Dimension(700, 200));
+        scrollPane.setPreferredSize(new Dimension(700, 150));
 
         // Layout manager and constraints
         setLayout(new GridBagLayout());
@@ -204,7 +204,12 @@ public class PrescricoesView extends JFrame {
         String condicoes = condicoesField.getText();
         String observacoes = observacoesField.getText();
 
-        // Chamar o método do controller para salvar o histórico médico
+        if(cpf.isEmpty() || alergias.isEmpty() || condicoes.isEmpty() || observacoes.isEmpty()){
+            JOptionPane.showMessageDialog(this, "Preencha todos os campos",
+                    "Erro", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
         try {
             boolean sucesso = controller.salvarHistoricoMedico(cpf, alergias, condicoes, observacoes);
             if (sucesso) {
@@ -224,6 +229,12 @@ public class PrescricoesView extends JFrame {
             String alergias = alergiasField.getText();
             String condicoes = condicoesField.getText();
             String observacoes = observacoesField.getText();
+
+            if(alergias.isEmpty() || condicoes.isEmpty() || observacoes.isEmpty()){
+                JOptionPane.showMessageDialog(this, "Preencha todos os campos",
+                        "Erro", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
 
             boolean sucesso = controller.atualizarHistoricoMedico(id, alergias, condicoes, observacoes);
             if (sucesso) {

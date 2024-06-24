@@ -63,8 +63,12 @@ public class AgenteSaudeController {
 
 
 
-    public boolean deleteAgenteSaude(int id) throws SQLException {
-        return AgenteSaudeModel.deleteAgenteSaude(id);
+    public int deleteAgenteSaude(int id) throws SQLException {
+        if(!AgenteSaudeModel.hasAgendamentos(id)){
+            AgenteSaudeModel.deleteAgenteSaude(id);
+            return 1;
+        }
+       return 2;
     }
 }
 

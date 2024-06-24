@@ -10,7 +10,7 @@ exports.up = function(knex) {
         table.string('condicoes_medicas').notNullable();
         table.string('outras_observacoes').notNullable();
 
-        table.foreign('idoso_id').references('id').inTable('idoso');
+        table.foreign('idoso_id').references('id').inTable('idoso').onDelete('CASCADE').onUpdate('CASCADE');
     })
 };
 

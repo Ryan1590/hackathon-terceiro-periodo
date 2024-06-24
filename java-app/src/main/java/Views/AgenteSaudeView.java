@@ -102,6 +102,7 @@ public class AgenteSaudeView extends JFrame {
         JLabel labelOutro = new JLabel("ID:");
         panelTextFieldOutro.add(labelOutro);
         panelTextFieldOutro.add(textFieldOutro);
+        textFieldOutro.setEditable(false);
         panelRight.add(panelTextFieldOutro, BorderLayout.SOUTH);
 
         // Adicionando os painéis esquerdo e direito ao painel principal
@@ -291,13 +292,14 @@ public class AgenteSaudeView extends JFrame {
 
         try {
             int id = Integer.parseInt(idTexto);
-            if (controller.deleteAgenteSaude(id)) {
+            int sucesso = controller.deleteAgenteSaude(id);
+            if (sucesso == 1) {
                 JOptionPane.showMessageDialog(this, "Agente de saúde excluído com sucesso!",
                         "Sucesso", JOptionPane.INFORMATION_MESSAGE);
                 loadAgentesSaude();
                 limparCampos();
-            } else {
-                JOptionPane.showMessageDialog(this, "Erro ao excluir agente de saúde. Verifique o ID e tente novamente.",
+            } else if(sucesso == 2) {
+                JOptionPane.showMessageDialog(this, "Esse agente possuí vinculo, não é possível excluir!",
                         "Erro", JOptionPane.ERROR_MESSAGE);
             }
         } catch (NumberFormatException | SQLException e) {
@@ -306,8 +308,8 @@ public class AgenteSaudeView extends JFrame {
         }
     }
 
-    // Método para atualizar um agente de saúde
     private void atualizarAgenteSaude() {
+        // Verifique se o campo ID está preenchido
         String idTexto = textFieldOutro.getText();
         if (idTexto.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Por favor, informe o ID do agente de saúde a ser atualizado.",
@@ -315,12 +317,30 @@ public class AgenteSaudeView extends JFrame {
             return;
         }
 
-        int id = Integer.parseInt(idTexto);
+        // Verifique se todos os outros campos estão preenchidos
         String nome = textFieldNome.getText();
         String cpf = textFieldCpf.getText();
-
-        // Obtendo a data de nascimento formatada corretamente
         String dataNascimentoStr = formattedTextFieldDataNascimento.getText();
+
+        if (nome.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Por favor, informe o nome do agente de saúde.",
+                    "Erro", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        if (cpf.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Por favor, informe o CPF do agente de saúde.",
+                    "Erro", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        if (dataNascimentoStr.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Por favor, informe a data de nascimento do agente de saúde.",
+                    "Erro", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        // Verificação e conversão da data de nascimento
         Date dataNascimento = null;
         try {
             SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
@@ -332,13 +352,8 @@ public class AgenteSaudeView extends JFrame {
             return;
         }
 
-        if (nome.isEmpty() || cpf.isEmpty() || dataNascimentoStr.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Preencha todos os campos!",
-                    "Erro", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-
         try {
+            int id = Integer.parseInt(idTexto);
             int result = controller.updateAgenteSaude(nome, cpf, String.valueOf(dataNascimento), id);
 
             switch (result) {
@@ -360,12 +375,14 @@ public class AgenteSaudeView extends JFrame {
                     JOptionPane.showMessageDialog(this, "Erro ao atualizar agente de saúde. Verifique os dados e tente novamente.",
                             "Erro", JOptionPane.ERROR_MESSAGE);
             }
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "ID inválido. Insira um número inteiro válido.",
+                    "Erro", JOptionPane.ERROR_MESSAGE);
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(this, "Erro ao atualizar agente de saúde: " + e.getMessage(),
                     "Erro", JOptionPane.ERROR_MESSAGE);
         }
     }
-
 
 
     // Método para limpar os campos de entrada

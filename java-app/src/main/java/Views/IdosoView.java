@@ -148,6 +148,7 @@ public class IdosoView extends JFrame {
         gbc.gridx++;
         textFieldId = new JTextField(5);
         panelLeft.add(textFieldId, gbc);
+        textFieldId.setEditable(false);
 
         JPanel panelRight = new JPanel(new BorderLayout());
 
@@ -238,6 +239,19 @@ public class IdosoView extends JFrame {
         }
         return formatter;
     }
+
+    private MaskFormatter createMaskFormattercpf(String format) {
+        MaskFormatter formatter = null;
+        try {
+            formatter = new MaskFormatter(format);
+            formatter.setPlaceholderCharacter('_');
+            formatter.setValidCharacters("0123456789"); // Permitir apenas números
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return formatter;
+    }
+
 
     // Método para carregar dados na tabela
     private void loadIdosos() {
@@ -361,7 +375,6 @@ public class IdosoView extends JFrame {
         }
     }
 
-
     private void atualizarIdoso() {
         String nome = textFieldNome.getText();
         String bairro = textFieldBairro.getText();
@@ -464,15 +477,15 @@ public class IdosoView extends JFrame {
 
         try {
             // Chamar o método do controller para excluir
-            boolean sucesso = idosoController.deleteUser(Integer.parseInt(idStr));
-            if (sucesso) {
+            int sucesso = idosoController.deleteUser(Integer.parseInt(idStr));
+            if (sucesso == 1) {
                 JOptionPane.showMessageDialog(this, "Idoso excluído com sucesso.");
                 // Limpar os campos após excluir
                 limparCampos();
                 // Atualizar a tabela
                 loadIdosos();
-            } else {
-                JOptionPane.showMessageDialog(this, "Erro ao excluir idoso.",
+            } else if(sucesso == 2) {
+                JOptionPane.showMessageDialog(this, "Idoso possui vínculo, não é possível excluir.",
                         "Erro", JOptionPane.ERROR_MESSAGE);
             }
         } catch (SQLException e) {

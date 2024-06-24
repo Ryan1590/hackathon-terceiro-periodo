@@ -60,6 +60,23 @@ public class vacinaModel {
         return vacinas;
     }
 
+    public boolean hasAgendamentos(int vacinaId) throws SQLException {
+        try (Connection connection = DataBase.connection();
+             PreparedStatement statement = connection.prepareStatement("SELECT COUNT(*) AS count FROM agendamento WHERE vacina_id = ?")) {
+
+            statement.setInt(1, vacinaId);
+
+            try (ResultSet resultSet = statement.executeQuery()) {
+                if (resultSet.next()) {
+                    int count = resultSet.getInt("count");
+                    return count > 0;
+                }
+            }
+        }
+        return false;
+    }
+
+
     public vacinaModel getVacina(int id) throws SQLException {
         try (Connection connection = DataBase.connection();
              PreparedStatement statement = connection.prepareStatement("SELECT * FROM vacina WHERE id = ?")) {
@@ -76,11 +93,6 @@ public class vacinaModel {
     }
 
     public boolean updateVacina(String nome, String descricao, int id) throws SQLException {
-        // Verifica se o novo nome já existe e não pertence à vacina que estamos tentando atualizar
-        if (verificarVacina(nome) && !getVacina(id).getNome().equals(nome)) {
-            return false;
-        }
-
         try (Connection connection = DataBase.connection();
              PreparedStatement statement = connection.prepareStatement(
                      "UPDATE vacina SET Nome = ?, Descricao = ? WHERE id = ?")) {
@@ -94,6 +106,7 @@ public class vacinaModel {
         }
     }
 
+
     public boolean deleteVacina(int id) throws SQLException {
         try (Connection connection = DataBase.connection();
              PreparedStatement statement = connection.prepareStatement("DELETE FROM vacina WHERE id = ?")) {
@@ -105,16 +118,20 @@ public class vacinaModel {
         }
     }
 
-    public static boolean verificarVacina(String nome) throws SQLException {
+    public boolean verificarVacina(String nome) throws SQLException {
         try (Connection connection = DataBase.connection();
-             PreparedStatement statement = connection.prepareStatement("SELECT Nome FROM vacina WHERE Nome = ?")) {
+             PreparedStatement statement = connection.prepareStatement("SELECT COUNT(*) AS count FROM vacina WHERE Nome = ?")) {
 
             statement.setString(1, nome);
 
             try (ResultSet resultSet = statement.executeQuery()) {
-                return resultSet.next(); // Retorna true se encontrar algum resultado
+                if (resultSet.next()) {
+                    int count = resultSet.getInt("count");
+                    return count > 0;
+                }
             }
         }
+        return false;
     }
 
     private vacinaModel extractVacinaFromResultSet(ResultSet resultSet) throws SQLException {
@@ -122,7 +139,6 @@ public class vacinaModel {
         vacina.setId(resultSet.getInt("id"));
         vacina.setNome(resultSet.getString("Nome"));
         vacina.setDescricao(resultSet.getString("Descricao"));
-
         return vacina;
     }
 }

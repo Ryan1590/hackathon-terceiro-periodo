@@ -41,15 +41,21 @@ public class IdosoController {
     }
 
     public int updateUser(String nome, Date dataNascimento, String cpf, String logradouro, String numero, String bairro, String cep, String cidade, String estado, int id) throws SQLException {
-
-        if (IdosoModel.verificarUser(nome)) {
-            return -1;
+        // Verificar se o nome já existe, excluindo o usuário atual
+        IdosoModel currentUser = idosoModel.getUser(id);
+        if (currentUser == null) {
+            return -3; // Usuário não encontrado
+        }
+        if (!currentUser.getName().equals(nome) && IdosoModel.verificarUser(nome)) {
+            return -1; // Nome já existe
         }
 
-        if (IdosoModel.verificarCpfExistente(cpf)) {
-            return -2;
+        // Verificar se o CPF já existe, excluindo o usuário atual
+        if (!currentUser.getCpf().equals(cpf) && IdosoModel.verificarCpfExistente(cpf)) {
+            return -2; // CPF já existe
         }
 
+        // Atualizar os dados do usuário
         boolean sucesso = idosoModel.updateUser(nome, dataNascimento, cpf, logradouro, numero, bairro, cep, cidade, estado, id);
         if (sucesso) {
             return 1; // Atualização bem-sucedida
@@ -59,10 +65,12 @@ public class IdosoController {
     }
 
 
-    public boolean deleteUser(int id) throws SQLException {
+
+    public int deleteUser(int id) throws SQLException {
         if (!idosoModel.hasAppointments(id)) {
-            return idosoModel.delete(id);
+            idosoModel.delete(id);
+            return 1;
         }
-        return false;
+        return 2;
     }
 }
